@@ -113,7 +113,7 @@ const Footer = () => {
           </div>
         </div>
         <div className="p-6 bg-gray-100  md:flex md:items-center md:justify-between">
-          <p className="text-2xl text-gray-500 justify-center sm:text-center flex flex-wrap">
+          <p className="text-2xl text-gray-500 justify-center sm:text-center flex flex-wrap gap-1">
             © {new Date().getFullYear()}{" "}
             <Link to="/" className="text-center inline-flex items-center">
               <img

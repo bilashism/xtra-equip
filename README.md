@@ -1,6 +1,6 @@
 # Xtra Equip (Frontend)
 
-- Live preview: 
+- Live preview: https://xtra-equip.web.app 
 
 ## Features
 - Fully responsive SPA built with mobile first approach. Supports all modern browsers.
