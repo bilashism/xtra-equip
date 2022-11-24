@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { AuthContext } from "../../../context/AuthProvider/AuthProvider";
 import logo from "../../../images/logo.svg";
 import { APP_NAME } from "../../../utilities/utilities";
-
+import { FaHome } from "react-icons/fa";
 const Navbar = () => {
   const [show, setShow] = useState(null);
   const [profile, setProfile] = useState(false);
@@ -39,6 +39,14 @@ const Navbar = () => {
 
   const menuItems = (
     <>
+      <li className="">
+        <Link to={"/"} className="cursor-pointer flex items-center">
+          {isMobile && <FaHome className="text-indigo-700 w-6 h-6" />}
+          <span className=" hover:text-indigo-700 xl:text-base text-base ml-3">
+            Home
+          </span>
+        </Link>
+      </li>
       <li className="">
         <a className="cursor-pointer flex items-center">
           {isMobile && (
