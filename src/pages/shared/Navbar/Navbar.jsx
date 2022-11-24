@@ -4,13 +4,16 @@ import { AuthContext } from "../../../context/AuthProvider/AuthProvider";
 import logo from "../../../images/logo.svg";
 import { APP_NAME } from "../../../utilities/utilities";
 import { FaHome } from "react-icons/fa";
+import { IoMdExit } from "react-icons/io";
+import { HiUserCircle } from "react-icons/hi";
+
 const Navbar = () => {
   const [show, setShow] = useState(null);
   const [profile, setProfile] = useState(false);
   const [isMobile, setIsMobile] = useState(
     !window.matchMedia(`(min-width: 1280px)`).matches
   );
-  const { user } = useContext(AuthContext);
+  const { user, userLogOut } = useContext(AuthContext);
 
   useEffect(() => {
     const cleanup = () =>
@@ -133,6 +136,15 @@ const Navbar = () => {
         </svg>
         <span className="ml-2">Account Settings</span>
       </li>
+      <li className="cursor-pointer text-gray-600 text-sm leading-3 tracking-normal mt-2 py-2 hover:text-indigo-700 flex items-center focus:text-indigo-700 focus:outline-none">
+        <button
+          type="button"
+          className="flex items-center"
+          onClick={userLogOut}>
+          <IoMdExit className="w-5 h-5" />
+          <span className="ml-2">Log Out</span>
+        </button>
+      </li>
     </>
   );
   const profileDropdown = (
@@ -146,11 +158,15 @@ const Navbar = () => {
               {profileMenuItems}
             </ul>
           )}
-          <img
-            className="rounded h-10 w-10 object-cover"
-            src="https://tuk-cdn.s3.amazonaws.com/assets/components/horizontal_navigation/hn_1.png"
-            alt="logo"
-          />
+          {user?.photoUrl ? (
+            <img
+              className="rounded h-10 w-10 object-cover"
+              src="https://tuk-cdn.s3.amazonaws.com/assets/components/horizontal_navigation/hn_1.png"
+              alt="logo"
+            />
+          ) : (
+            <HiUserCircle className="w-10 h-10 transition-colors hover:text-indigo-600" />
+          )}
           <p className="text-white text-sm ml-2">Jane Doe</p>
         </>
       ) : (

@@ -56,7 +56,7 @@ const AuthProvider = ({ children }) => {
    * @returns The user is being returned.
    */
   const userLogOut = () => {
-    localStorage.removeItem("Token");
+    localStorage.removeItem("accessToken");
     return signOut(auth);
   };
 
