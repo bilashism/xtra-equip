@@ -6,7 +6,7 @@ const CategoryItem = ({ category }) => {
   return (
     <div className="relative mb-4 before:content-[''] before:rounded-md before:absolute before:inset-0 before:bg-indigo-600 before:bg-opacity-20 group hover:before:bg-opacity-70 transition-all">
       <Link
-        to={`/category/${_id}`}
+        to={`/categories/${_id}`}
         className="flex justify-center items-center h-full">
         <picture className="max-w-xl h-full">
           <img

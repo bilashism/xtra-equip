@@ -18,13 +18,13 @@ export const router = createBrowserRouter([
         element: <Home />
       },
       {
-        path: "/category/:id",
+        path: "/categories/:id",
         element: (
           <PrivateRoute>
             <Category />
           </PrivateRoute>
         ),
-        loader: ({ params }) => fetch(`${APP_SERVER}/${params.id}`)
+        loader: ({ params }) => fetch(`${APP_SERVER}/categories/${params.id}`)
       },
 
       {
