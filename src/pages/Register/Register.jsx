@@ -40,9 +40,9 @@ const Register = () => {
 
   // handle User Registration form
   const handleUserRegistration = data => {
-    const { email, password, name } = data;
+    const { email, password, name, userRole } = data;
 
-    if (!email || !password || !name) return;
+    if (!email || !password || !name || !userRole) return;
 
     createUser(email, password)
       .then(user => {
@@ -52,7 +52,7 @@ const Register = () => {
         const profile = { displayName: name, photoURL: "" };
         updateUserProfile(profile)
           .then(data => {
-            saveUserToDb(email, name);
+            saveUserToDb(email, name, userRole);
             toast.success("Updating the result");
           })
           .catch(err => {
@@ -69,9 +69,9 @@ const Register = () => {
       });
   };
 
-  const saveUserToDb = async (email, name) => {
+  const saveUserToDb = async (email, name, userRole) => {
     try {
-      const user = { email, name };
+      const user = { email, name, userRole };
       const response = await fetch(`${APP_SERVER}/users`, {
         method: "post",
         headers: {
@@ -315,6 +315,47 @@ const Register = () => {
                   </div>
                   {errors?.password && (
                     <p className="text-red-500">{errors.password?.message}</p>
+                  )}
+                </div>
+
+                <div className="mt-2.5 relative text-gray-400 focus-within:text-gray-600">
+                  <div className="flex items-center mb-4">
+                    <input
+                      id="role-buyer"
+                      type="radio"
+                      value="buyer"
+                      name="userRole"
+                      defaultChecked
+                      className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300"
+                      {...register("userRole", {
+                        required: "Please select your role"
+                      })}
+                    />
+                    <label
+                      htmlFor="role-buyer"
+                      className="ml-2 text-sm font-medium text-gray-900">
+                      I want to buy
+                    </label>
+                  </div>
+                  <div className="flex items-center mb-4">
+                    <input
+                      id="role-seller"
+                      type="radio"
+                      value="seller"
+                      name="userRole"
+                      className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300"
+                      {...register("userRole", {
+                        required: "Please select your role"
+                      })}
+                    />
+                    <label
+                      htmlFor="role-seller"
+                      className="ml-2 text-sm font-medium text-gray-900">
+                      I want to sell
+                    </label>
+                  </div>
+                  {errors?.userRole && (
+                    <p className="text-red-500">{errors.userRole?.message}</p>
                   )}
                 </div>
 

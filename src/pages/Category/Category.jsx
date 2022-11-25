@@ -1,13 +1,15 @@
 import React from "react";
-import { useNavigation } from "react-router-dom";
+import { useLoaderData, useNavigation } from "react-router-dom";
 import LoadingCircle from "../../components/ui/LoadingCircle";
 
 const Category = () => {
   const navigation = useNavigation();
+  const products = useLoaderData();
 
   if (navigation?.state === "loading") {
     return <LoadingCircle />;
   }
+  console.log(products);
 
   return (
     <section>
