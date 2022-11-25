@@ -51,7 +51,7 @@ const Navbar = () => {
         </Link>
       </li>
       <li className="">
-        <a className="cursor-pointer flex items-center">
+        <Link to="/dashboard" className="cursor-pointer flex items-center">
           {isMobile && (
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -72,7 +72,7 @@ const Navbar = () => {
           <span className=" hover:text-indigo-700 xl:text-base text-base ml-3">
             Dashboard
           </span>
-        </a>
+        </Link>
       </li>
     </>
   );
@@ -248,7 +248,7 @@ const Navbar = () => {
         </nav>
         {/* Navbar */}
         <nav>
-          <div className="p-4 w-full flex xl:hidden justify-between items-center bg-gray-50 fixed top-0 z-40 shadow">
+          <div className="p-4 w-full flex xl:hidden justify-between items-center bg-gray-50 sticky top-0 z-40 shadow">
             <div className="">{logoItem}</div>
             {/* <div> */}
             <div id="menu" className="" onClick={() => setShow(!show)}>
