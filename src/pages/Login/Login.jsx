@@ -59,13 +59,37 @@ const Login = () => {
     }
   }, [token]);
 
+  const saveUserToDb = async (email, name) => {
+    try {
+      const user = { email, name };
+      const response = await fetch(`${APP_SERVER}/users`, {
+        method: "post",
+        headers: {
+          "content-type": "application/json"
+        },
+        body: JSON.stringify(user)
+      });
+      const data = await response.json();
+
+      setUserLoginEmail(email);
+
+      if (data?.insertedId) {
+        toast.success("Logged in successfully! 🎉");
+      }
+      if (data?.message) {
+        toast.success("Welcome back!");
+      }
+    } catch (error) {
+      console.error(error);
+    }
+  };
   const handleProviderLogIn = provider => {
     providerLogin(provider)
       .then(data => {
-        toast.success("Logged in successfully!");
-        const curUserEmail = data.user.email;
-        // getToken(curUser);
-        setUserLoginEmail(curUserEmail);
+        // toast.success("Logged in successfully!");
+        const curUserEmail = data?.user?.email;
+
+        saveUserToDb(curUserEmail, data?.user?.displayName);
       })
       .catch(err => {
         err?.code && toast.error(err.code);
@@ -183,7 +207,7 @@ const Login = () => {
                     <path d="M20.283 10.356h-8.327v3.451h4.792c-.446 2.193-2.313 3.453-4.792 3.453a5.27 5.27 0 0 1-5.279-5.28 5.27 5.27 0 0 1 5.279-5.279c1.259 0 2.397.447 3.29 1.178l2.6-2.599c-1.584-1.381-3.615-2.233-5.89-2.233a8.908 8.908 0 0 0-8.934 8.934 8.907 8.907 0 0 0 8.934 8.934c4.467 0 8.529-3.249 8.529-8.934 0-.528-.081-1.097-.202-1.625z"></path>
                   </svg>
                 </div>
-                Sign in with Google
+                Continue with Google
               </button>
             </div>
           </div>

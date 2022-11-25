@@ -8,14 +8,15 @@ import { FaCheck } from "react-icons/fa";
 import { useForm } from "react-hook-form";
 import useToken from "../../hooks/useToken";
 import { APP_SERVER } from "../../utilities/utilities";
+import { GoogleAuthProvider } from "firebase/auth";
 
 const Register = () => {
-  const { createUser, updateUserProfile, setAuthLoading } =
+  const { createUser, updateUserProfile, setAuthLoading, providerLogin } =
     useContext(AuthContext);
   const [userCreatedEmail, setUserCreatedEmail] = useState("");
   const [token] = useToken(userCreatedEmail);
   const navigate = useNavigate();
-
+  const googleProvider = new GoogleAuthProvider();
   useTitle("Register");
 
   if (token) {
@@ -83,9 +84,29 @@ const Register = () => {
       if (data.insertedId) {
         toast.success("Account created successfully! 🎉");
       }
+      if (data?.message) {
+        toast.success("Welcome back!");
+      }
     } catch (error) {
       console.error(error);
     }
+  };
+
+  const handleProviderLogIn = provider => {
+    providerLogin(provider)
+      .then(data => {
+        // toast.success("Logged in successfully!");
+        const curUserEmail = data?.user?.email;
+
+        saveUserToDb(curUserEmail, data?.user?.displayName);
+      })
+      .catch(err => {
+        err?.code && toast.error(err.code);
+        console.error(err);
+      })
+      .finally(() => {
+        setAuthLoading(false);
+      });
   };
 
   return (
@@ -307,9 +328,12 @@ const Register = () => {
               </div>
             </form>
 
+            <hr className="border-2 border-indigo-600 my-6" />
+
             <div className="mt-3 space-y-3">
               <button
                 type="button"
+                onClick={() => handleProviderLogIn(googleProvider)}
                 className="relative inline-flex items-center justify-center w-full px-4 py-4 text-base font-semibold text-gray-700 transition-all duration-200 bg-white border-2 border-gray-200 rounded-md hover:bg-gray-100 focus:bg-gray-100 hover:text-black focus:text-black focus:outline-none">
                 <div className="absolute inset-y-0 left-0 p-4">
                   <svg
