@@ -3,15 +3,20 @@ import NotFound from "../components/NotFound";
 import DashboardLayout from "../layouts/DashboardLayout/DashboardLayout";
 import Main from "../layouts/Main/Main";
 import Category from "../pages/Category/Category";
+import AddProduct from "../pages/Dashboard/AddProduct/AddProduct";
 import AllBuyers from "../pages/Dashboard/AllBuyers/AllBuyers";
 import AllSellers from "../pages/Dashboard/AllSellers/AllSellers";
+import MyBuyers from "../pages/Dashboard/MyBuyers/MyBuyers";
+import MyProducts from "../pages/Dashboard/MyProducts/MyProducts";
 import ReportedItems from "../pages/Dashboard/ReportedItems/ReportedItems";
+import Settings from "../pages/Dashboard/Settings/Settings";
 import Home from "../pages/Home/Home";
 import Login from "../pages/Login/Login";
 import Register from "../pages/Register/Register";
 import { APP_SERVER } from "../utilities/utilities";
 import AdminRoute from "./AdminRoute/AdminRoute";
 import PrivateRoute from "./PrivateRoute/PrivateRoute";
+import SellerRoute from "./SellerRoute/SellerRoute";
 
 export const router = createBrowserRouter([
   {
@@ -49,11 +54,12 @@ export const router = createBrowserRouter([
     children: [
       {
         path: "/dashboard",
-        element: (
-          <AdminRoute>
-            <AllSellers />
-          </AdminRoute>
-        )
+        element: <Settings />
+      },
+      ,
+      {
+        path: "/dashboard/settings",
+        element: <Settings />
       },
       {
         path: "/dashboard/allSellers",
@@ -77,6 +83,30 @@ export const router = createBrowserRouter([
           <AdminRoute>
             <ReportedItems />
           </AdminRoute>
+        )
+      },
+      {
+        path: "/dashboard/addProduct",
+        element: (
+          <SellerRoute>
+            <AddProduct />
+          </SellerRoute>
+        )
+      },
+      {
+        path: "/dashboard/myProducts",
+        element: (
+          <SellerRoute>
+            <MyProducts />
+          </SellerRoute>
+        )
+      },
+      {
+        path: "/dashboard/myBuyers",
+        element: (
+          <SellerRoute>
+            <MyBuyers />
+          </SellerRoute>
         )
       }
     ],
