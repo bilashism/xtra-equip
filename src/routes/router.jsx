@@ -5,6 +5,7 @@ import Main from "../layouts/Main/Main";
 import Category from "../pages/Category/Category";
 import AllBuyers from "../pages/Dashboard/AllBuyers/AllBuyers";
 import AllSellers from "../pages/Dashboard/AllSellers/AllSellers";
+import ReportedItems from "../pages/Dashboard/ReportedItems/ReportedItems";
 import Home from "../pages/Home/Home";
 import Login from "../pages/Login/Login";
 import Register from "../pages/Register/Register";
@@ -66,6 +67,14 @@ export const router = createBrowserRouter([
         element: (
           <PrivateRoute>
             <AllBuyers />
+          </PrivateRoute>
+        )
+      },
+      {
+        path: "/dashboard/reportedItems",
+        element: (
+          <PrivateRoute>
+            <ReportedItems />
           </PrivateRoute>
         )
       }
