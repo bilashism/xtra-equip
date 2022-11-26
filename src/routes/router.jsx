@@ -3,6 +3,7 @@ import NotFound from "../components/NotFound";
 import DashboardLayout from "../layouts/DashboardLayout/DashboardLayout";
 import Main from "../layouts/Main/Main";
 import Category from "../pages/Category/Category";
+import AllBuyers from "../pages/Dashboard/AllBuyers/AllBuyers";
 import AllSellers from "../pages/Dashboard/AllSellers/AllSellers";
 import Home from "../pages/Home/Home";
 import Login from "../pages/Login/Login";
@@ -57,6 +58,14 @@ export const router = createBrowserRouter([
         element: (
           <PrivateRoute>
             <AllSellers />
+          </PrivateRoute>
+        )
+      },
+      {
+        path: "/dashboard/allBuyers",
+        element: (
+          <PrivateRoute>
+            <AllBuyers />
           </PrivateRoute>
         )
       }

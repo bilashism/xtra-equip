@@ -1,8 +1,8 @@
 import React from "react";
 import { FaUser } from "react-icons/fa";
 
-const SellerCard = ({ seller }) => {
-  const { name, email, _id, img } = seller;
+const UserCard = ({ user }) => {
+  const { name, email, _id, img } = user;
   return (
     <div className="w-full max-w-sm bg-white border border-gray-200 rounded-lg shadow-md  ">
       <div className="flex flex-col items-center pb-10">
@@ -35,4 +35,4 @@ const SellerCard = ({ seller }) => {
   );
 };
 
-export default SellerCard;
+export default UserCard;
