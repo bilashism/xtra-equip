@@ -1,11 +1,38 @@
+import axios from "axios";
 import React, { useContext, useEffect } from "react";
-import { useForm } from "react-hook-form";
+import ReactDatePicker from "react-datepicker";
+import { Controller, useForm } from "react-hook-form";
 import toast from "react-hot-toast";
 import { AuthContext } from "../../../context/AuthProvider/AuthProvider";
+import { APP_SERVER, IMG_DB_API_KEY } from "../../../utilities/utilities";
+import { useQuery } from "@tanstack/react-query";
+
+import "react-datepicker/dist/react-datepicker.css";
+import { useNavigate } from "react-router-dom";
 
 const AddProduct = () => {
   const { user } = useContext(AuthContext);
+  const navigate = useNavigate();
+  const { data: categories = [], isLoading } = useQuery({
+    queryKey: ["categories"],
+    queryFn: async () => {
+      const response = await axios(`${APP_SERVER}/categories`);
+      const data = await response.data;
+      return data;
+    }
+  });
+
+  const { data: bdDistrictNames = [] } = useQuery({
+    queryKey: ["bd", "districtNames"],
+    queryFn: async () => {
+      const response = await axios(`${APP_SERVER}/bd/districtNames`);
+      const data = await response.data;
+      return data;
+    }
+  });
+
   const {
+    control,
     register,
     formState,
     reset,
@@ -20,19 +47,60 @@ const AddProduct = () => {
     }
   }, [formState, reset]);
 
-  const handleAddProduct = data => {
-    if (!data) {
+  const handleAddProduct = formData => {
+    if (!formData) {
       toast.error("Please fill up the form properly and try again");
       return;
     }
     const defaultData = {
       isVerified: false,
       isSold: false,
-      isAdvertised: false
+      isAdvertised: false,
+      postedOn: new Date().getTime()
     };
-    console.log({ ...data, ...defaultData });
-    console.log(data);
-    console.log("object");
+    const formattedTimestamp = new Date(formData?.purchaseDate).getTime();
+    formData.purchaseDate = formattedTimestamp;
+
+    // process image for imagebb
+    const productImgFormData = new FormData();
+    const image = formData?.image[0];
+    const imgBBUrl = `https://api.imgbb.com/1/upload?key=${IMG_DB_API_KEY}`;
+    // the field value in the formData has to be exactly === "image"
+    productImgFormData.append("image", image);
+
+    fetch(imgBBUrl, {
+      method: "post",
+      body: productImgFormData
+    })
+      .then(res => res.json())
+      .then(data => {
+        // console.log(data);
+        const imgUrl = data?.data?.url;
+        formData.image = imgUrl;
+        const product = { ...formData, ...defaultData };
+
+        axios
+          .post(`${APP_SERVER}/products`, product, {
+            headers: {
+              "content-type": "application/json",
+              authorization: `Bearer ${localStorage.getItem("accessToken")}`
+            }
+          })
+          .then(data => {
+            if (data?.data?.insertedId) {
+              toast.success("Product added successfully!");
+              navigate("/dashboard/myProducts");
+            }
+          })
+          .catch(err => {
+            toast.error("Something went wrong!");
+            console.error(err);
+          });
+      })
+      .catch(err => {
+        toast.error("Something went wrong!");
+        console.error(err);
+      });
   };
 
   return (
@@ -40,9 +108,11 @@ const AddProduct = () => {
       <h2 className="mb-8">Add a Product</h2>
 
       <div className="">
-        <form onSubmit={handleSubmit(handleAddProduct)} className="grid gap-4">
+        <form
+          onSubmit={handleSubmit(handleAddProduct)}
+          className="grid gap-4 capitalize ">
           <div className="flex gap-8 flex-wrap">
-            <div className="relative z-0 mb-6 flex-grow group">
+            <div className="relative mb-6 flex-grow group">
               <input
                 type="text"
                 name="productName"
@@ -59,7 +129,11 @@ const AddProduct = () => {
                 product name
               </label>
               {errors.productName && (
-                <p role="alert">{errors.productName?.message}</p>
+                <p
+                  role="alert"
+                  className="lowercase first-letter:capitalize text-red-600 mt-2">
+                  {errors.productName?.message}
+                </p>
               )}
             </div>
 
@@ -81,13 +155,17 @@ const AddProduct = () => {
                 selling price
               </label>
               {errors.sellingPrice && (
-                <p role="alert">{errors.sellingPrice?.message}</p>
+                <p
+                  role="alert"
+                  className="lowercase first-letter:capitalize text-red-600 mt-2">
+                  {errors.sellingPrice?.message}
+                </p>
               )}
             </div>
           </div>
 
           <div className="flex gap-8 flex-wrap">
-            <div className="relative z-0 mb-6 flex-grow group">
+            <div className="relative mb-6 flex-grow group">
               <input
                 type="file"
                 accept="image/*"
@@ -104,55 +182,76 @@ const AddProduct = () => {
                 className="peer-focus:font-medium absolute text-sm text-gray-500  duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600  peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">
                 image
               </label>
-              {errors.image && <p role="alert">{errors.image?.message}</p>}
+              {errors.image && (
+                <p
+                  role="alert"
+                  className="lowercase first-letter:capitalize text-red-600 mt-2">
+                  {errors.image?.message}
+                </p>
+              )}
             </div>
-            <div className="relative z-0 mb-6 flex-grow group">
+            <div className="relative mb-6 flex-grow group">
               <select
-                id="productCategory"
-                {...register("productCategory", {
+                id="categoryId"
+                {...register("categoryId", {
                   required: "please add a product category"
                 })}
-                className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 ">
-                <option value="">Select a product category</option>
-                <option value="excellent">excellent</option>
-                <option value="good">good</option>
-                <option value="fair">fair</option>
+                className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 capitalize">
+                <option value="">Select product category</option>
+                {categories.map(category => (
+                  <option
+                    key={category._id}
+                    value={category.name + " " + category._id}>
+                    {category.name}
+                  </option>
+                ))}
               </select>
-              {errors.productCategory && (
-                <p role="alert">{errors.productCategory?.message}</p>
+              {errors.categoryId && (
+                <p
+                  role="alert"
+                  className="lowercase first-letter:capitalize text-red-600 mt-2">
+                  {errors.categoryId?.message}
+                </p>
               )}
             </div>
           </div>
 
           <div className="flex gap-8 flex-wrap">
-            <div className="relative z-0 mb-6 flex-grow group">
-              <input
-                type="date"
+            <div className="relative mb-6 flex-grow group">
+              <Controller
+                control={control}
                 name="purchaseDate"
-                id="purchaseDate"
-                className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none    focus:outline-none focus:ring-0 focus:border-blue-600 peer"
-                placeholder=" "
-                {...register("purchaseDate", {
-                  required: "please add product purchase date",
-                  valueAsDate: true
-                })}
+                rules={{ required: "please add a product category" }}
+                render={({ field }) => (
+                  <ReactDatePicker
+                    className="input block  py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none  focus:outline-none focus:ring-0 focus:border-blue-600 peer"
+                    placeholderText="Select Date"
+                    onChange={e => field.onChange(e)}
+                    selected={field.value}
+                    dateFormat="d MMMM, yyyy"
+                  />
+                )}
               />
               <label
                 htmlFor="purchaseDate"
-                className="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">
+                className="peer-focus:font-medium left-0 absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">
                 purchase date
               </label>
               {errors.purchaseDate && (
-                <p role="alert">{errors.purchaseDate?.message}</p>
+                <p
+                  role="alert"
+                  className="lowercase first-letter:capitalize text-red-600 mt-2">
+                  {errors.purchaseDate?.message}
+                </p>
               )}
             </div>
 
-            <div className="relative z-0 mb-6 flex-grow group">
+            <div className="relative mb-6 flex-grow group">
               <input
                 type="number"
                 name="buyingPrice"
                 id="buyingPrice"
-                className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none    focus:outline-none focus:ring-0 focus:border-blue-600 peer"
+                className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-blue-600 peer"
                 placeholder=" "
                 {...register("buyingPrice", {
                   required: "please add buying Price",
@@ -165,24 +264,32 @@ const AddProduct = () => {
                 Buying price
               </label>
               {errors.buyingPrice && (
-                <p role="alert">{errors.buyingPrice?.message}</p>
+                <p
+                  role="alert"
+                  className="lowercase first-letter:capitalize text-red-600 mt-2">
+                  {errors.buyingPrice?.message}
+                </p>
               )}
             </div>
 
-            <div className="relative z-0 mb-6 flex-grow group">
+            <div className="relative mb-6 flex-grow group">
               <select
                 id="condition"
                 {...register("condition", {
                   required: "please add condition"
                 })}
-                className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 ">
+                className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 capitalize">
                 <option value="">Select product condition</option>
                 <option value="excellent">excellent</option>
                 <option value="good">good</option>
                 <option value="fair">fair</option>
               </select>
               {errors.condition && (
-                <p role="alert">{errors.condition?.message}</p>
+                <p
+                  role="alert"
+                  className="lowercase first-letter:capitalize text-red-600 mt-2">
+                  {errors.condition?.message}
+                </p>
               )}
             </div>
           </div>
@@ -202,7 +309,11 @@ const AddProduct = () => {
               className="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500  "
               placeholder="Write your description here..."></textarea>
             {errors.description && (
-              <p role="alert">{errors.description?.message}</p>
+              <p
+                role="alert"
+                className="lowercase first-letter:capitalize text-red-600 mt-2">
+                {errors.description?.message}
+              </p>
             )}
           </div>
           <div className="grid md:grid-cols-2 md:gap-6">
@@ -226,7 +337,7 @@ const AddProduct = () => {
                 name
               </label>
               {/* {errors.sellerName && (
-                <p role="alert">{errors.sellerName?.message}</p>
+                <p role="alert" className="lowercase first-letter:capitalize text-red-600 mt-2">{errors.sellerName?.message}</p>
               )} */}
             </div>
             <div className="relative z-0 mb-6 w-full group">
@@ -249,7 +360,7 @@ const AddProduct = () => {
                 email
               </label>
               {/* {errors.sellerEmail && (
-                <p role="alert">{errors.sellerEmail?.message}</p>
+                <p role="alert" className="lowercase first-letter:capitalize text-red-600 mt-2">{errors.sellerEmail?.message}</p>
               )} */}
             </div>
           </div>
@@ -275,29 +386,35 @@ const AddProduct = () => {
                 Phone number (123-456-7890)
               </label>
               {errors.sellerPhone && (
-                <p role="alert">{errors.sellerPhone?.message}</p>
+                <p
+                  role="alert"
+                  className="lowercase first-letter:capitalize text-red-600 mt-2">
+                  {errors.sellerPhone?.message}
+                </p>
               )}
             </div>
             <div className="relative z-0 mb-6 w-full group">
-              {/* <label
-                htmlFor="location"
-                className="block mb-2 text-sm font-medium text-gray-900 ">
-                Select your location
-              </label> */}
               <select
-                id="location"
                 {...register("location", {
                   required: "please add your location"
                 })}
-                className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 ">
+                className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 capitalize">
                 <option value="">Select your location</option>
-                <option value="US">United States</option>
-                <option value="CA">Canada</option>
-                <option value="FR">France</option>
-                <option value="DE">Germany</option>
+                <optgroup label="Bangladesh">
+                  {bdDistrictNames.map((name, i) => (
+                    <option key={`district-${i + 1}`} value={name}>
+                      {name}
+                    </option>
+                  ))}
+                </optgroup>
+                <option value="others">others</option>
               </select>
               {errors.location && (
-                <p role="alert">{errors.location?.message}</p>
+                <p
+                  role="alert"
+                  className="lowercase first-letter:capitalize text-red-600 mt-2">
+                  {errors.location?.message}
+                </p>
               )}
             </div>
           </div>
