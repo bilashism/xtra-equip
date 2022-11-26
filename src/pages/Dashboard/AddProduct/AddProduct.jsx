@@ -192,8 +192,8 @@ const AddProduct = () => {
             </div>
             <div className="relative mb-6 flex-grow group">
               <select
-                id="categoryId"
-                {...register("categoryId", {
+                id="category"
+                {...register("category", {
                   required: "please add a product category"
                 })}
                 className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 capitalize">
@@ -206,11 +206,11 @@ const AddProduct = () => {
                   </option>
                 ))}
               </select>
-              {errors.categoryId && (
+              {errors.category && (
                 <p
                   role="alert"
                   className="lowercase first-letter:capitalize text-red-600 mt-2">
-                  {errors.categoryId?.message}
+                  {errors.category?.message}
                 </p>
               )}
             </div>
