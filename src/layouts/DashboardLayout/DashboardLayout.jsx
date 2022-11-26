@@ -258,8 +258,8 @@ const DashboardLayout = () => {
               <div
                 className={
                   show
-                    ? "w-64 max-w-full absolute top-24 sm:relative bg-indigo-100 shadow md:h-full flex-col justify-between sm:hidden transition duration-150 ease-in-out transform -translate-x-0 ml-0"
-                    : "w-64 max-w-full absolute top-24 sm:relative bg-indigo-100 shadow md:h-full flex-col justify-between sm:hidden transition duration-150 ease-in-out transform -translate-x-full  -ml-4"
+                    ? "w-64 max-w-full fixed top-28 sm:relative bg-indigo-100 shadow md:h-full flex-col justify-between sm:hidden transition duration-150 ease-in-out transform -translate-x-0 ml-0"
+                    : "w-64 max-w-full fixed top-28 sm:relative bg-indigo-100 shadow md:h-full flex-col justify-between sm:hidden transition duration-150 ease-in-out transform -translate-x-full  -ml-4"
                 }
                 id="mobile-nav">
                 <div
