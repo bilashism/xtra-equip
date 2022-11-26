@@ -10,6 +10,7 @@ import Home from "../pages/Home/Home";
 import Login from "../pages/Login/Login";
 import Register from "../pages/Register/Register";
 import { APP_SERVER } from "../utilities/utilities";
+import AdminRoute from "./AdminRoute/AdminRoute";
 import PrivateRoute from "./PrivateRoute/PrivateRoute";
 
 export const router = createBrowserRouter([
@@ -49,33 +50,33 @@ export const router = createBrowserRouter([
       {
         path: "/dashboard",
         element: (
-          <PrivateRoute>
+          <AdminRoute>
             <AllSellers />
-          </PrivateRoute>
+          </AdminRoute>
         )
       },
       {
         path: "/dashboard/allSellers",
         element: (
-          <PrivateRoute>
+          <AdminRoute>
             <AllSellers />
-          </PrivateRoute>
+          </AdminRoute>
         )
       },
       {
         path: "/dashboard/allBuyers",
         element: (
-          <PrivateRoute>
+          <AdminRoute>
             <AllBuyers />
-          </PrivateRoute>
+          </AdminRoute>
         )
       },
       {
         path: "/dashboard/reportedItems",
         element: (
-          <PrivateRoute>
+          <AdminRoute>
             <ReportedItems />
-          </PrivateRoute>
+          </AdminRoute>
         )
       }
     ],
