@@ -41,9 +41,9 @@ const DashboardLayout = () => {
             </svg>
             <span className="text-sm  ml-2">all sellers</span>
           </div>
-          <div className="py-1 px-3 bg-white rounded text-slate-800 flex items-center justify-center text-xs">
-            5
-          </div>
+          {/* <div className="py-1 px-3 bg-white rounded text-slate-800 flex items-center justify-center text-xs">
+          5
+        </div> */}
         </Link>
       </li>
       <li className="flex w-full justify-between text-gray-600 hover:text-indigo-800 cursor-pointer items-center mb-6">
@@ -67,9 +67,9 @@ const DashboardLayout = () => {
             </svg>
             <span className="text-sm  ml-2">all buyers</span>
           </div>
-          <div className="py-1 px-3 bg-white rounded text-slate-800 flex items-center justify-center text-xs">
+          {/* <div className="py-1 px-3 bg-white rounded text-slate-800 flex items-center justify-center text-xs">
             8
-          </div>
+          </div> */}
         </Link>
       </li>
       <li className="flex w-full justify-between text-gray-600 hover:text-indigo-800 cursor-pointer items-center mb-6">

@@ -3,7 +3,7 @@ import NotFound from "../components/NotFound";
 import DashboardLayout from "../layouts/DashboardLayout/DashboardLayout";
 import Main from "../layouts/Main/Main";
 import Category from "../pages/Category/Category";
-import Dashboard from "../pages/Dashboard/Dashboard/Dashboard";
+import AllSellers from "../pages/Dashboard/AllSellers/AllSellers";
 import Home from "../pages/Home/Home";
 import Login from "../pages/Login/Login";
 import Register from "../pages/Register/Register";
@@ -48,7 +48,15 @@ export const router = createBrowserRouter([
         path: "/dashboard",
         element: (
           <PrivateRoute>
-            <Dashboard />
+            <AllSellers />
+          </PrivateRoute>
+        )
+      },
+      {
+        path: "/dashboard/allSellers",
+        element: (
+          <PrivateRoute>
+            <AllSellers />
           </PrivateRoute>
         )
       }

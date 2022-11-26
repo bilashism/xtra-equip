@@ -5,7 +5,7 @@ import { router } from "./routes/router";
 
 function App() {
   return (
-    <div className="">
+    <div className="grid gap-16">
       <RouterProvider router={router} />
       <Toaster />
     </div>
