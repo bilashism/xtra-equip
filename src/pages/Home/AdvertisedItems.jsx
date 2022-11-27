@@ -1,28 +1,17 @@
 import React, { useState } from "react";
-import {
-  CarouselProvider,
-  Slider,
-  Slide,
-  ButtonBack,
-  ButtonNext
-} from "pure-react-carousel";
-import "pure-react-carousel/dist/react-carousel.es.css";
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
 import { APP_SERVER } from "../../utilities/utilities";
 import LoadingCircle from "../../components/ui/LoadingCircle";
 import { formatDistance } from "date-fns";
-import { Navigation, Pagination, Scrollbar, A11y, Autoplay } from "swiper";
+import { Pagination, Autoplay } from "swiper";
 import { Swiper, SwiperSlide } from "swiper/react";
+import { Link } from "react-router-dom";
 import "swiper/css";
 import "swiper/css/pagination";
-import { Link } from "react-router-dom";
+
 const AdvertisedItems = () => {
-  const {
-    data: advertisedProducts = [],
-    isLoading,
-    refetch
-  } = useQuery({
+  const { data: advertisedProducts = [], isLoading } = useQuery({
     queryKey: ["products", "advertisement"],
     queryFn: async () => {
       const response = await axios(`${APP_SERVER}/products/advertisement`, {
@@ -42,7 +31,8 @@ const AdvertisedItems = () => {
   if (isLoading) {
     return <LoadingCircle />;
   }
-  console.log(advertisedProducts);
+  // console.log(advertisedProducts);
+
   return (
     <div className="relative overflow-hidden">
       <h2 className="text-3xl text-center my-12">Advertised Items</h2>
