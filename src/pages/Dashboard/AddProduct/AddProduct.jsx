@@ -56,6 +56,8 @@ const AddProduct = () => {
       isVerified: false,
       isSold: false,
       isAdvertised: false,
+      isBooked: false,
+      isReported: false,
       postedOn: new Date().getTime()
     };
     const formattedTimestamp = new Date(formData?.purchaseDate).getTime();
@@ -228,6 +230,7 @@ const AddProduct = () => {
                     placeholderText="Select Date"
                     onChange={e => field.onChange(e)}
                     selected={field.value}
+                    maxDate={new Date()}
                     dateFormat="d MMMM, yyyy"
                   />
                 )}

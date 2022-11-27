@@ -33,8 +33,7 @@ export const router = createBrowserRouter([
           <PrivateRoute>
             <Category />
           </PrivateRoute>
-        ),
-        loader: ({ params }) => fetch(`${APP_SERVER}/categories/${params.id}`)
+        )
       },
 
       {
