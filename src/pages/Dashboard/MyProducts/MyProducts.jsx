@@ -56,6 +56,29 @@ const MyProducts = () => {
 
   const handleAdCampaign = product => {
     const productId = product?._id;
+    axios
+      .put(
+        `${APP_SERVER}/products/advertisement/${productId}?email=${user?.email}`,
+        "",
+        {
+          headers: {
+            authorization: `Bearer ${localStorage.getItem("accessToken")}`
+          }
+        }
+      )
+      .then(data => {
+        if (data?.modifiedCount) {
+          toast.success("Campaign is running now!");
+        }
+      })
+      .catch(err => {
+        toast.error("Campaign setup incomplete. Please try again!");
+        console.error(err);
+      })
+      .finally(() => {
+        refetch();
+        setShowAdModal(false);
+      });
   };
 
   const handleProductDelete = id => {
