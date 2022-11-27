@@ -1,7 +1,7 @@
 import React from "react";
 import { formatDistance } from "date-fns";
 
-const ProductCard = ({ product, handleModal }) => {
+const ProductCard = ({ product, handleModal, handleAdModal }) => {
   // console.log(product);
   const {
     _id,
@@ -41,6 +41,7 @@ const ProductCard = ({ product, handleModal }) => {
           {!isSold && !isAdvertised ? (
             <button
               type="button"
+              onClick={() => handleAdModal(product)}
               className="bg-yellow-200 text-yellow-900 text-xs py-1.5 px-6 rounded-full hover:shadow hover:bg-yellow-400 transition">
               Advertise
             </button>
