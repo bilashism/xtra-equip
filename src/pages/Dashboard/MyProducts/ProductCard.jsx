@@ -1,8 +1,8 @@
 import React from "react";
 import { formatDistance } from "date-fns";
 
-const ProductCard = ({ product }) => {
-  console.log(product);
+const ProductCard = ({ product, handleModal }) => {
+  // console.log(product);
   const {
     _id,
     category,
@@ -12,6 +12,7 @@ const ProductCard = ({ product }) => {
     location,
     postedOn,
     productName,
+    description,
     sellingPrice
   } = product;
   return (
@@ -21,7 +22,7 @@ const ProductCard = ({ product }) => {
       </div>
       <div className="bg-white">
         <div className="flex items-center justify-between px-4 pt-4">
-          <div>
+          {/* <div>
             <svg
               xmlns="http://www.w3.org/2000/svg"
               className="icon icon-tabler icon-tabler-bookmark"
@@ -36,23 +37,30 @@ const ProductCard = ({ product }) => {
               <path stroke="none" d="M0 0h24v24H0z" fill="none" />
               <path d="M9 4h6a2 2 0 0 1 2 2v14l-5-3l-5 3v-14a2 2 0 0 1 2 -2" />
             </svg>
-          </div>
-          {isAdvertised && (
-            <div className="bg-yellow-200 py-1.5 px-6 rounded-full">
-              <p className="text-xs text-yellow-900">Featured</p>
+          </div> */}
+          {!isSold && !isAdvertised ? (
+            <button
+              type="button"
+              className="bg-yellow-200 text-yellow-900 text-xs py-1.5 px-6 rounded-full hover:shadow hover:bg-yellow-400 transition">
+              Advertise
+            </button>
+          ) : (
+            <div className="bg-yellow-200 py-1.5 px-6 rounded-full hover:shadow hover:bg-yellow-400 transition">
+              <p className="text-xs text-yellow-900">Advertised</p>
             </div>
           )}
         </div>
         <div className="p-4">
           <div className="flex items-center">
-            <h2 className="text-lg font-semibold">{productName}</h2>
+            <h2 className="text-lg font-semibold capitalize">{productName}</h2>
             <p className="text-xs text-gray-600 pl-5">
               {formatDistance(new Date(), postedOn)}
             </p>
           </div>
-          <p className="text-xs text-gray-600 mt-2">
-            The Apple iPhone XS is available in 3 colors with 64GB memory. Shoot
-            amazing videos
+          <p className="text-xs text-gray-600 mt-2 overflow-hidden  text-ellipsis ">
+            {description?.length >= 100
+              ? `${description.slice(0, 99)}...`
+              : description}
           </p>
           <div className="flex mt-4">
             <div>
@@ -68,9 +76,17 @@ const ProductCard = ({ product }) => {
             </div>
           </div>
           <div className="flex items-center justify-between py-4">
-            <h2 className="text-indigo-700 text-xs font-semibold">
+            {/* <h2 className="text-indigo-700 text-xs font-semibold">
               {location}
-            </h2>
+            </h2> */}
+            <div className="">
+              <button
+                type="button"
+                onClick={() => handleModal(product)}
+                className="bg-red-200 text-red-900 text-xs py-1.5 px-6 rounded-full hover:shadow hover:bg-red-400 transition">
+                Delete
+              </button>
+            </div>
             <h3 className="text-indigo-700 text-xl font-semibold">
               ${sellingPrice}
             </h3>

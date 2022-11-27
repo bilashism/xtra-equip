@@ -7,7 +7,7 @@ const UserConfirmationModal = ({
   userHandler
 }) => {
   // const { name, _id } = userData;
-
+  // console.log(userData);
   return (
     <div className="">
       <div className="">
@@ -40,8 +40,9 @@ const UserConfirmationModal = ({
               <h2 className="text-3xl lg:text-4xl font-semibold leading-7 lg:leading-9 text-gray-800 mt-3">
                 Delete{" "}
                 <span className="text-red-600 capitalize">
-                  {userData?.name}
+                  {userData?.name || userData?.productName}
                 </span>
+                ?
               </h2>
               <p className="text-base leading-4 mt-6 text-gray-600">
                 Are you sure?
