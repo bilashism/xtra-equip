@@ -55,7 +55,7 @@ const ProductCard = ({ product, handleModal, handleAdModal }) => {
           <div className="flex items-center">
             <h2 className="text-lg font-semibold capitalize">{productName}</h2>
             <p className="text-xs text-gray-600 pl-5">
-              {formatDistance(new Date(), postedOn)}
+              {formatDistance(new Date(), postedOn)} ago
             </p>
           </div>
           <p className="text-xs text-gray-600 mt-2 overflow-hidden  text-ellipsis ">
