@@ -100,7 +100,7 @@ const CategoryProductCard = ({
               <button
                 type="button"
                 disabled={isBooked}
-                // onClick={() => handleBookingModal(product)}
+                onClick={() => handleBookingModal(product)}
                 className={`${
                   isBooked
                     ? "cursor-not-allowed"
