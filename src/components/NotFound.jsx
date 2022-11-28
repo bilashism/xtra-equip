@@ -30,15 +30,15 @@ const NotFound = () => {
           </blockquote>
 
           <p className="flex flex-wrap gap-8 justify-center items-center">
-            <Link to="/login" className="hover:underline text-purple-600">
+            {/* <Link to="/login" className="hover:underline text-purple-600">
               Login now
-            </Link>
+            </Link> */}
             <Link to="/" className="hover:underline text-purple-600">
               Go back to homepage
             </Link>
-            <Link to="/register" className="hover:underline text-purple-600">
+            {/* <Link to="/register" className="hover:underline text-purple-600">
               Create a free account
-            </Link>
+            </Link> */}
           </p>
         </div>
       </div>
