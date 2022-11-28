@@ -5,8 +5,10 @@ import LoadingCircle from "../../../components/ui/LoadingCircle";
 import toast from "react-hot-toast";
 import Modal from "../../../components/ui/Modal";
 import { FaAt, FaUser } from "react-icons/fa";
+import useTitle from "../../../hooks/useTitle";
 
 const ReportedItems = () => {
+  useTitle("Reported items");
   const [showConfirmationModal, setShowConfirmationModal] = useState(false);
   const [reportedProductData, setReportedProductData] = useState();
 
@@ -26,7 +28,7 @@ const ReportedItems = () => {
       return data;
     }
   });
-  console.log(reportedProducts);
+  // console.log(reportedProducts);
   const handleModal = user => {
     setShowConfirmationModal(true);
     setReportedProductData(user);

@@ -5,8 +5,10 @@ import UserCard from "../../../components/ui/UserCard";
 import LoadingCircle from "../../../components/ui/LoadingCircle";
 import UserConfirmationModal from "../../../components/ui/UserConfirmationModal";
 import toast from "react-hot-toast";
+import useTitle from "../../../hooks/useTitle";
 
 const AllBuyers = () => {
+  useTitle("All buyers");
   const [showUserConfirmationModal, setShowUserConfirmationModal] =
     useState(false);
   const [userData, setUserData] = useState();
@@ -59,7 +61,7 @@ const AllBuyers = () => {
   }
   return (
     <section className="">
-      <h2 className="text-2xl font-bold mb-8">All Sellers {buyers?.length}</h2>
+      <h2 className="text-2xl font-bold mb-8">All Buyers {buyers?.length}</h2>
       <div className="grid md:grid-cols-2 xl:grid-cols-3 gap-8">
         {buyers.map(seller => (
           <UserCard

@@ -7,12 +7,14 @@ import { useLoaderData, useLocation, useNavigation } from "react-router-dom";
 import LoadingCircle from "../../components/ui/LoadingCircle";
 import Modal from "../../components/ui/Modal";
 import { AuthContext } from "../../context/AuthProvider/AuthProvider";
+import useTitle from "../../hooks/useTitle";
 import { APP_SERVER } from "../../utilities/utilities";
 import CategoryProductCard from "./CategoryProductCard";
 
 const Category = () => {
   // const navigation = useNavigation();
   // const products = useLoaderData();
+  useTitle("Category");
   const { user } = useContext(AuthContext);
 
   const location = useLocation();

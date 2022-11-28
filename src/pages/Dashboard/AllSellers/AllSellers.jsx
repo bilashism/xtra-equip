@@ -5,8 +5,11 @@ import UserCard from "../../../components/ui/UserCard";
 import LoadingCircle from "../../../components/ui/LoadingCircle";
 import UserConfirmationModal from "../../../components/ui/UserConfirmationModal";
 import toast from "react-hot-toast";
+import axios from "axios";
+import useTitle from "../../../hooks/useTitle";
 
 const AllSellers = () => {
+  useTitle("All sellers");
   const [showUserConfirmationModal, setShowUserConfirmationModal] =
     useState(false);
   const [userData, setUserData] = useState();
@@ -54,6 +57,40 @@ const AllSellers = () => {
       });
   };
 
+  const handleVerifySeller = (ev, seller) => {
+    const sellerId = seller?._id;
+    const sellerEmail = seller?.email;
+    const btn = ev.target;
+    btn.disabled = true;
+    const verified = {
+      isSellerVerified: true
+    };
+
+    axios
+      .put(
+        `${APP_SERVER}/users/seller/${sellerId}?email=${sellerEmail}`,
+        verified,
+        {
+          headers: {
+            authorization: `Bearer ${localStorage.getItem("accessToken")}`
+          }
+        }
+      )
+      .then(data => {
+        console.log(data);
+        if (data.data?.modifiedCount) {
+          toast.success(`Verified successfully!`);
+          refetch();
+          setShowUserConfirmationModal(false);
+        }
+      })
+      .catch(err => {
+        toast.error(`Something went wrong!`);
+        btn.disabled = false;
+        console.error(err);
+      });
+  };
+
   if (isLoading) {
     return <LoadingCircle />;
   }
@@ -67,6 +104,7 @@ const AllSellers = () => {
             user={seller}
             setShowUserConfirmationModal={setShowUserConfirmationModal}
             handleModal={handleModal}
+            handleVerify={handleVerifySeller}
           />
         ))}
       </div>

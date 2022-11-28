@@ -257,7 +257,9 @@ const DashboardLayout = () => {
             <aside className="lg:col-span-2">
               <div className="w-64 max-w-full absolute sm:relative bg-indigo-100 shadow md:h-full flex-col justify-between hidden sm:flex">
                 <div className="px-8">
-                  <ul className="py-12 sticky top-0">{dashboardMenuItems}</ul>
+                  <ul className="py-12 sticky top-0 capitalize">
+                    {dashboardMenuItems}
+                  </ul>
                 </div>
               </div>
               <div

@@ -11,7 +11,10 @@ import UserConfirmationModal from "../../../components/ui/UserConfirmationModal"
 import toast from "react-hot-toast";
 import Modal from "../../../components/ui/Modal";
 import { FcAdvertising } from "react-icons/fc";
+import { Link } from "react-router-dom";
+import useTitle from "../../../hooks/useTitle";
 const MyProducts = () => {
+  useTitle("My products");
   const [showProductConfirmationModal, setShowProductConfirmationModal] =
     useState(false);
   const [productData, setProductData] = useState();
@@ -106,7 +109,21 @@ const MyProducts = () => {
 
   return (
     <div>
-      <h2 className="mb-8">My Products</h2>
+      <h2 className="mb-8">
+        {" "}
+        {products?.length >= 1 ? (
+          `My Products ${products?.length}`
+        ) : (
+          <>
+            No products added yet!{" "}
+            <Link
+              to="/dashboard/addProduct"
+              className="hover:underline text-blue-600">
+              Add a product
+            </Link>
+          </>
+        )}
+      </h2>
 
       <div className="grid lg:grid-cols-3 gap-8">
         {products.map(product => (

@@ -9,8 +9,10 @@ import { useQuery } from "@tanstack/react-query";
 
 import "react-datepicker/dist/react-datepicker.css";
 import { useNavigate } from "react-router-dom";
+import useTitle from "../../../hooks/useTitle";
 
 const AddProduct = () => {
+  useTitle("Add a product");
   const { user } = useContext(AuthContext);
   const navigate = useNavigate();
   const { data: categories = [], isLoading } = useQuery({

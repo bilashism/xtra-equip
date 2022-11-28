@@ -14,7 +14,7 @@ const CategoryProductCard = ({
     category,
     image,
     isAdvertised,
-    isVerified,
+    isSellerVerified,
     isSold,
     isBooked,
     location,
@@ -65,7 +65,11 @@ const CategoryProductCard = ({
               <p className="flex items-center gap-2 flex-wrap">
                 Seller: <b className="capitalize">{sellerName}</b>{" "}
                 <span className="inline-flex items-center">
-                  {isVerified ? <GoVerified className="fill-blue-600" /> : ""}
+                  {isSellerVerified ? (
+                    <GoVerified className="fill-blue-600" />
+                  ) : (
+                    ""
+                  )}
                 </span>
               </p>
 

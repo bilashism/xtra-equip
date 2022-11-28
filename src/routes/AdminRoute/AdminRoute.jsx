@@ -1,5 +1,6 @@
 import React from "react";
 import { useContext } from "react";
+import toast from "react-hot-toast";
 import { Navigate, useLocation } from "react-router-dom";
 import LoadingCircle from "../../components/ui/LoadingCircle";
 import { AuthContext } from "../../context/AuthProvider/AuthProvider";
@@ -15,6 +16,7 @@ const AdminRoute = ({ children }) => {
   }
   if (!user?.uid || !isAdmin) {
     userLogOut();
+    toast.error("You are not an admin!");
     return <Navigate to="/login" state={{ from: location }} replace />;
   }
   return children;
