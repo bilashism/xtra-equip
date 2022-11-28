@@ -25,10 +25,14 @@
 - react hook from
 - react date picker
   
-* Admin account: 
-Email: super@admin.com
-Pass: 123456
+* Admin account:  
+adminEmail: super@admin.com  
+adminPassword: 123456  
 
-* Buyer account:
-Email: buyer@mail.com
-Pass: 123456
+* Buyer account:  
+buyerEmail: buyer@mail.com  
+buyerPassword: 123456  
+
+* Seller account:  
+sellerEmail: seller@mail.com  
+sellerPassword: 123456  
