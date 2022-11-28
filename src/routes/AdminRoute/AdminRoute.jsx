@@ -6,7 +6,7 @@ import { AuthContext } from "../../context/AuthProvider/AuthProvider";
 import useAdmin from "../../hooks/useAdmin";
 
 const AdminRoute = ({ children }) => {
-  const { user, authLoading } = useContext(AuthContext);
+  const { user, authLoading, userLogOut } = useContext(AuthContext);
   const [isAdmin, isAdminLoading] = useAdmin(user?.email);
   const location = useLocation();
 
@@ -14,6 +14,7 @@ const AdminRoute = ({ children }) => {
     return <LoadingCircle />;
   }
   if (!user?.uid || !isAdmin) {
+    userLogOut();
     return <Navigate to="/login" state={{ from: location }} replace />;
   }
   return children;
