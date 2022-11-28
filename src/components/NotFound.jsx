@@ -25,9 +25,9 @@ const NotFound = () => {
             Opps!!! <br /> Something went wrong.
           </h2>
 
-          <quote className="py-8 text-blue-600">
+          <blockquote className="py-8 text-blue-600">
             {error ? error?.message || error?.statusText : `Come back later!`}
-          </quote>
+          </blockquote>
 
           <p className="flex flex-wrap gap-8 justify-center items-center">
             <Link to="/login" className="hover:underline text-purple-600">

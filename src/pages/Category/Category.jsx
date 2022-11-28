@@ -130,11 +130,22 @@ const Category = () => {
   return (
     <section>
       <div className="container mx-auto px-4">
-        <h2 className="mb-8">
-          Category{" "}
-          <span className="text-indigo-600 capitalize">
-            {products[0]?.category?.split(" ").shift()}
-          </span>
+        <h2 className="mb-8 text-center text-2xl">
+          {products?.length ? (
+            <>
+              Category{" "}
+              <span className="text-indigo-600 capitalize">
+                {products[0]?.category?.split(" ").shift()}
+              </span>
+            </>
+          ) : (
+            <>
+              No product available for now.
+              <br />
+              <br />
+              Please check back later or browse other categories.
+            </>
+          )}
         </h2>
         <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-10">
           {products.map(product => (

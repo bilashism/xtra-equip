@@ -50,30 +50,32 @@ const Navbar = () => {
           </span>
         </Link>
       </li>
-      <li className="">
-        <Link to="/dashboard" className="cursor-pointer flex items-center">
-          {isMobile && (
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              className="w-6 h-6 md:w-8 md:h-8 text-indigo-700"
-              viewBox="0 0 24 24"
-              strokeWidth="1.5"
-              stroke="currentColor"
-              fill="none"
-              strokeLinecap="round"
-              strokeLinejoin="round">
-              <path stroke="none" d="M0 0h24v24H0z" />
-              <rect x={4} y={4} width={6} height={6} rx={1} />
-              <rect x={14} y={4} width={6} height={6} rx={1} />
-              <rect x={4} y={14} width={6} height={6} rx={1} />
-              <rect x={14} y={14} width={6} height={6} rx={1} />
-            </svg>
-          )}
-          <span className=" hover:text-indigo-700 xl:text-base text-base ml-3">
-            Dashboard
-          </span>
-        </Link>
-      </li>
+      {user?.uid && (
+        <li className="">
+          <Link to="/dashboard" className="cursor-pointer flex items-center">
+            {isMobile && (
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                className="w-6 h-6 md:w-8 md:h-8 text-indigo-700"
+                viewBox="0 0 24 24"
+                strokeWidth="1.5"
+                stroke="currentColor"
+                fill="none"
+                strokeLinecap="round"
+                strokeLinejoin="round">
+                <path stroke="none" d="M0 0h24v24H0z" />
+                <rect x={4} y={4} width={6} height={6} rx={1} />
+                <rect x={14} y={4} width={6} height={6} rx={1} />
+                <rect x={4} y={14} width={6} height={6} rx={1} />
+                <rect x={14} y={14} width={6} height={6} rx={1} />
+              </svg>
+            )}
+            <span className=" hover:text-indigo-700 xl:text-base text-base ml-3">
+              Dashboard
+            </span>
+          </Link>
+        </li>
+      )}
     </>
   );
 
