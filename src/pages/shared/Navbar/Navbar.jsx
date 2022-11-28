@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { AuthContext } from "../../../context/AuthProvider/AuthProvider";
 import logo from "../../../images/logo.svg";
 import { APP_NAME } from "../../../utilities/utilities";
-import { FaHome } from "react-icons/fa";
+import { FaBlog, FaHome } from "react-icons/fa";
 import { IoMdExit } from "react-icons/io";
 import { HiUserCircle } from "react-icons/hi";
 
@@ -47,6 +47,14 @@ const Navbar = () => {
           {isMobile && <FaHome className="text-indigo-700 w-6 h-6" />}
           <span className=" hover:text-indigo-700 xl:text-base text-base ml-3">
             Home
+          </span>
+        </Link>
+      </li>
+      <li className="">
+        <Link to={"/blogs"} className="cursor-pointer flex items-center">
+          {isMobile && <FaBlog className="text-indigo-700 w-6 h-6" />}
+          <span className=" hover:text-indigo-700 xl:text-base text-base ml-3">
+            Blogs
           </span>
         </Link>
       </li>
