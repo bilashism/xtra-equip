@@ -56,10 +56,16 @@ const MyOrders = () => {
                   ${product?.sellingPrice}
                 </span>
                 <Link
-                  to={`/payment/${product?._id}`}
-                  disabled={!!product?.isPaid}
-                  className="bg-green-400 px-4 py-1 rounded">
-                  {!!product?.isPaid ? "Paid" : "Pay now"}
+                  aria-disabled={!!product?.isSold}
+                  tabIndex={!!product?.isSold ? -1 : 1}
+                  to={`/dashboard/payment/${product?._id}`}
+                  disabled={!!product?.isSold}
+                  className={`${
+                    !!product?.isSold
+                      ? "cursor-not-allowed pointer-events-none bg-green-200 hover:cursor-not-allowed"
+                      : ""
+                  } bg-green-400 px-4 py-1 rounded`}>
+                  {!!product?.isSold ? "Paid" : "Pay now"}
                 </Link>
               </p>
             </article>
