@@ -9,7 +9,7 @@ const LoadingCircle = () => {
     <div role="status" className="mx-auto py-4">
       <svg
         aria-hidden="true"
-        class="mr-2 w-8 h-8 text-indigo-200 animate-spin fill-blue-600"
+        className="m-2 w-8 h-8 text-indigo-200 animate-spin fill-blue-600"
         viewBox="0 0 100 101"
         fill="none"
         xmlns="http://www.w3.org/2000/svg">
@@ -22,7 +22,7 @@ const LoadingCircle = () => {
           className="fill-indigo-600"
         />
       </svg>
-      <span class="sr-only">Loading...</span>
+      <span className="sr-only">Loading...</span>
     </div>
   );
 };

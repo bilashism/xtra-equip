@@ -6,6 +6,8 @@ import { APP_NAME } from "../../../utilities/utilities";
 import { FaBlog, FaHome } from "react-icons/fa";
 import { IoMdExit } from "react-icons/io";
 import { HiUserCircle } from "react-icons/hi";
+import { BiCaretDown } from "react-icons/bi";
+import LoadingCircle from "../../../components/ui/LoadingCircle";
 
 const Navbar = () => {
   const [show, setShow] = useState(null);
@@ -13,7 +15,7 @@ const Navbar = () => {
   const [isMobile, setIsMobile] = useState(
     !window.matchMedia(`(min-width: 1280px)`).matches
   );
-  const { user, userLogOut } = useContext(AuthContext);
+  const { user, userLogOut, authLoading } = useContext(AuthContext);
 
   useEffect(() => {
     const cleanup = () =>
@@ -58,31 +60,35 @@ const Navbar = () => {
           </span>
         </Link>
       </li>
-      {user?.uid && (
-        <li className="">
-          <Link to="/dashboard" className="cursor-pointer flex items-center">
-            {isMobile && (
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                className="w-6 h-6 md:w-8 md:h-8 text-indigo-700"
-                viewBox="0 0 24 24"
-                strokeWidth="1.5"
-                stroke="currentColor"
-                fill="none"
-                strokeLinecap="round"
-                strokeLinejoin="round">
-                <path stroke="none" d="M0 0h24v24H0z" />
-                <rect x={4} y={4} width={6} height={6} rx={1} />
-                <rect x={14} y={4} width={6} height={6} rx={1} />
-                <rect x={4} y={14} width={6} height={6} rx={1} />
-                <rect x={14} y={14} width={6} height={6} rx={1} />
-              </svg>
-            )}
-            <span className=" hover:text-indigo-700 xl:text-base text-base ml-3">
-              Dashboard
-            </span>
-          </Link>
-        </li>
+      {authLoading ? (
+        <LoadingCircle />
+      ) : (
+        user?.uid && (
+          <li className="">
+            <Link to="/dashboard" className="cursor-pointer flex items-center">
+              {isMobile && (
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  className="w-6 h-6 md:w-8 md:h-8 text-indigo-700"
+                  viewBox="0 0 24 24"
+                  strokeWidth="1.5"
+                  stroke="currentColor"
+                  fill="none"
+                  strokeLinecap="round"
+                  strokeLinejoin="round">
+                  <path stroke="none" d="M0 0h24v24H0z" />
+                  <rect x={4} y={4} width={6} height={6} rx={1} />
+                  <rect x={14} y={4} width={6} height={6} rx={1} />
+                  <rect x={4} y={14} width={6} height={6} rx={1} />
+                  <rect x={14} y={14} width={6} height={6} rx={1} />
+                </svg>
+              )}
+              <span className=" hover:text-indigo-700 xl:text-base text-base ml-3">
+                Dashboard
+              </span>
+            </Link>
+          </li>
+        )
       )}
     </>
   );
@@ -161,23 +167,33 @@ const Navbar = () => {
     <div
       className="w-full flex items-center justify-end relative cursor-pointer"
       onClick={() => setProfile(!profile)}>
-      {user?.uid ? (
+      {authLoading ? (
+        <LoadingCircle />
+      ) : user?.uid ? (
         <>
           {profile && (
             <ul className="p-2 w-40 border-r bg-white absolute rounded left-0 shadow mt-16 top-0 ">
               {profileMenuItems}
             </ul>
           )}
-          {user?.photoUrl ? (
+          {user?.photoURL ? (
             <img
               className="rounded h-10 w-10 object-cover"
-              src="https://tuk-cdn.s3.amazonaws.com/assets/components/horizontal_navigation/hn_1.png"
-              alt="logo"
+              src={user?.photoURL}
+              alt={user?.displayName}
+              loading="lazy"
+              width={40}
+              height={40}
+              fetchpriority="low"
+              decoding="async"
             />
           ) : (
-            <HiUserCircle className="w-10 h-10 transition-colors hover:text-indigo-600" />
+            <HiUserCircle className="w-10 h-10 text-blue-400  transition-colors hover:text-indigo-600" />
           )}
-          <p className="text-white text-sm ml-2">Jane Doe</p>
+          <p className="text-xs ml-2 capitalize flex flex-col gap-1 items-center">
+            <span className="">{user?.displayName}</span>
+            <BiCaretDown className=" text-blue-400 hover:text-indigo-600" />
+          </p>
         </>
       ) : (
         <Link
