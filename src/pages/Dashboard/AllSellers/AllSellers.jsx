@@ -77,7 +77,7 @@ const AllSellers = () => {
         }
       )
       .then(data => {
-        console.log(data);
+        // console.log(data);
         if (data.data?.modifiedCount) {
           toast.success(`Verified successfully!`);
           refetch();

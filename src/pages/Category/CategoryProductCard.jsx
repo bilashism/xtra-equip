@@ -68,7 +68,7 @@ const CategoryProductCard = ({
                   {isSellerVerified ? (
                     <GoVerified className="fill-blue-600" />
                   ) : (
-                    ""
+                    <GoUnverified className="fill-gray-600" />
                   )}
                 </span>
               </p>
