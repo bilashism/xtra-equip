@@ -14,7 +14,7 @@ const useSeller = email => {
       })
         .then(res => res.json())
         .then(data => {
-          setIsSeller(data?.isAdmin);
+          setIsSeller(data?.isSeller);
           setIsSellerLoading(false);
         })
         .catch(err => console.error(err));
