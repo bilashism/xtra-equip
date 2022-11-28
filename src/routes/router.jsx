@@ -7,6 +7,7 @@ import AddProduct from "../pages/Dashboard/AddProduct/AddProduct";
 import AllBuyers from "../pages/Dashboard/AllBuyers/AllBuyers";
 import AllSellers from "../pages/Dashboard/AllSellers/AllSellers";
 import MyBuyers from "../pages/Dashboard/MyBuyers/MyBuyers";
+import MyOrders from "../pages/Dashboard/MyOrders/MyOrders";
 import MyProducts from "../pages/Dashboard/MyProducts/MyProducts";
 import ReportedItems from "../pages/Dashboard/ReportedItems/ReportedItems";
 import Settings from "../pages/Dashboard/Settings/Settings";
@@ -15,6 +16,7 @@ import Login from "../pages/Login/Login";
 import Register from "../pages/Register/Register";
 import { APP_SERVER } from "../utilities/utilities";
 import AdminRoute from "./AdminRoute/AdminRoute";
+import BuyerRoute from "./BuyerRoute/BuyerRoute";
 import PrivateRoute from "./PrivateRoute/PrivateRoute";
 import SellerRoute from "./SellerRoute/SellerRoute";
 
@@ -110,6 +112,14 @@ export const router = createBrowserRouter([
           <SellerRoute>
             <MyBuyers />
           </SellerRoute>
+        )
+      },
+      {
+        path: "/dashboard/myOrders",
+        element: (
+          <BuyerRoute>
+            <MyOrders />
+          </BuyerRoute>
         )
       }
     ],
