@@ -186,6 +186,10 @@ const Navbar = () => {
               height={40}
               fetchpriority="low"
               decoding="async"
+              onError={ev => {
+                ev.target.src =
+                  "data:image/svg+xml,%3Csvg stroke='currentColor' fill='currentColor' stroke-width='0' viewBox='0 0 496 512' height='1em' width='1em' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M248 8C111 8 0 119 0 256s111 248 248 248 248-111 248-248S385 8 248 8zm0 96c48.6 0 88 39.4 88 88s-39.4 88-88 88-88-39.4-88-88 39.4-88 88-88zm0 344c-58.7 0-111.3-26.6-146.5-68.2 18.8-35.4 55.6-59.8 98.5-59.8 2.4 0 4.8.4 7.1 1.1 13 4.2 26.6 6.9 40.9 6.9 14.3 0 28-2.7 40.9-6.9 2.3-.7 4.7-1.1 7.1-1.1 42.9 0 79.7 24.4 98.5 59.8C359.3 421.4 306.7 448 248 448z'%3E%3C/path%3E%3C/svg%3E";
+              }}
             />
           ) : (
             <HiUserCircle className="w-10 h-10 text-blue-400  transition-colors hover:text-indigo-600" />
@@ -245,11 +249,11 @@ const Navbar = () => {
             </div>
             <div className="h-full xl:flex items-center justify-end hidden">
               <div className="w-full h-full flex items-center">
-                <div className="w-full pr-12 h-full flex items-center border-gray-700 border-r">
+                <div className="w-full pr-12 h-full flex items-center">
                   {searchItem}
                 </div>
                 <div className="w-full h-full flex items-center">
-                  <div className="w-32 h-full flex items-center justify-center border-gray-700 border-r text-indigo-400 cursor-pointer">
+                  <div className="w-32 h-full flex items-center justify-center text-indigo-400 cursor-pointer">
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       className="icon icon-tabler icon-tabler-bell"
