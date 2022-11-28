@@ -10,6 +10,7 @@ const ProductCard = ({ product, handleModal, handleAdModal }) => {
     isAdvertised,
     isSold,
     location,
+    isBooked,
     postedOn,
     productName,
     description,
@@ -63,18 +64,25 @@ const ProductCard = ({ product, handleModal, handleAdModal }) => {
               ? `${description.slice(0, 99)}...`
               : description}
           </p>
-          <div className="flex mt-4">
-            <div>
+          <div className="flex flex-wrap gap-4 mt-4">
+            <div className="">
               <p className="text-xs text-gray-600 px-2 bg-gray-200 py-1">
                 {category.split(" ").shift()}
               </p>
             </div>
 
-            <div className="pl-2">
+            <div className="">
               <p className="text-xs text-slate-600 px-2 bg-indigo-200 py-1">
                 {isSold ? "sold" : "available"}
               </p>
             </div>
+            {isBooked && (
+              <div className="">
+                <p className="text-xs text-slate-600 px-2 bg-blue-200 py-1">
+                  booked
+                </p>
+              </div>
+            )}
           </div>
           <div className="flex items-center justify-between py-4">
             {/* <h2 className="text-indigo-700 text-xs font-semibold">

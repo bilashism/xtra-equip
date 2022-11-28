@@ -53,7 +53,7 @@ const AddProduct = () => {
       return;
     }
     const defaultData = {
-      isVerified: false,
+      isPaid: false,
       isSold: false,
       isAdvertised: false,
       isBooked: false,
