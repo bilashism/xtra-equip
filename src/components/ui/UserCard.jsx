@@ -4,7 +4,7 @@ import { GoVerified } from "react-icons/go";
 
 const UserCard = ({ user, handleModal, handleVerify }) => {
   const { name, email, _id, img, isSellerVerified } = user;
-  console.log(isSellerVerified);
+
   return (
     <div className="w-full bg-white border border-gray-200 rounded-lg shadow-md  ">
       <div className="flex flex-col items-center pb-10">
@@ -39,8 +39,12 @@ const UserCard = ({ user, handleModal, handleVerify }) => {
             type="button"
             disabled={!!isSellerVerified}
             onClick={ev => handleVerify && handleVerify(ev, user)}
-            className="inline-flex items-center px-4 py-2 text-sm font-medium text-center text-white bg-green-700 rounded-lg hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-blue-300 ">
-            Verify
+            className={`${
+              !!isSellerVerified
+                ? "cursor-not-allowed bg-slate-400"
+                : "bg-green-700 hover:bg-green-800"
+            } inline-flex items-center px-4 py-2 text-sm font-medium text-center text-white  rounded-lg  focus:ring-4 focus:outline-none focus:ring-blue-300 `}>
+            {!!isSellerVerified ? "Verified" : "Verify"}
           </button>
         </div>
       </div>
