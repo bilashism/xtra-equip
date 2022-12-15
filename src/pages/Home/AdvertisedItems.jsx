@@ -35,7 +35,9 @@ const AdvertisedItems = () => {
 
   return (
     <div className="relative overflow-hidden">
-      <h2 className="text-3xl text-center my-12">Advertised Items</h2>
+      <h2 className="text-3xl text-center my-12 drop-shadow-md">
+        Advertised Items
+      </h2>
       <div className="">
         <Swiper
           slidesPerView={1}
@@ -82,7 +84,7 @@ const AdvertisedItems = () => {
               description,
               sellingPrice
             }) => (
-              <SwiperSlide key={_id}>
+              <SwiperSlide key={_id} className="mb-10">
                 <div className="max-w-2xl mx-auto py-4">
                   <div className="bg-white shadow-md rounded-lg max-w-sm">
                     <Link to={`/categories/${category?.split(" ").pop()}`}>
@@ -100,11 +102,11 @@ const AdvertisedItems = () => {
                     <div className="px-5 pb-5">
                       <Link
                         to={`/categories/${category?.split(" ").pop()}`}
-                        className="flex flex-wrap items-center gap-8">
-                        <h3 className="text-gray-900 font-semibold text-xl tracking-tight capitalize flex-grow">
+                        className="flex items-center gap-4">
+                        <h3 className="text-gray-900 font-semibold text-xl tracking-tight capitalize truncate">
                           {productName}
                         </h3>
-                        <p className="text-xs">
+                        <p className="text-xs text-right basis-2/5">
                           {formatDistance(new Date(), postedOn)} ago
                         </p>
                       </Link>
