@@ -1,4 +1,5 @@
 import React from "react";
+import CountUp from "react-countup";
 import certificationBadge from "../../images/certification-badge.png";
 
 const Header = () => {
@@ -96,7 +97,11 @@ const Header = () => {
                         />
                       </svg>
                       <h2 className="font-bold text-white text-7xl ml-2.5">
-                        395
+                        <CountUp
+                          end={1124}
+                          formattingFn={n => new Intl.NumberFormat().format(n)}
+                          enableScrollSpy
+                        />
                       </h2>
                     </div>
                     <p className="max-w-xs mt-1.5 text-xl text-white">

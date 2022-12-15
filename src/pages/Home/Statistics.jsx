@@ -1,4 +1,5 @@
 import React from "react";
+import CountUp from "react-countup";
 
 const Statistics = () => {
   return (
@@ -28,7 +29,9 @@ const Statistics = () => {
                   />
                 </svg>
                 <div className="ml-4">
-                  <h4 className="text-4xl font-bold text-gray-900">6+</h4>
+                  <h4 className="text-4xl font-bold text-gray-900">
+                    <CountUp end={6} enableScrollSpy />+
+                  </h4>
                   <p className="mt-1.5 text-lg font-medium leading-tight text-gray-500">
                     Years in business
                   </p>
@@ -54,7 +57,9 @@ const Statistics = () => {
                   />
                 </svg>
                 <div className="ml-4">
-                  <h4 className="text-4xl font-bold text-gray-900">37+</h4>
+                  <h4 className="text-4xl font-bold text-gray-900">
+                    <CountUp end={37} enableScrollSpy />+
+                  </h4>
                   <p className="mt-1.5 text-lg font-medium leading-tight text-gray-500">
                     Team members
                   </p>
@@ -80,7 +85,13 @@ const Statistics = () => {
                   />
                 </svg>
                 <div className="ml-4">
-                  <h4 className="text-4xl font-bold text-gray-900">3,274</h4>
+                  <h4 className="text-4xl font-bold text-gray-900">
+                    <CountUp
+                      end={3274}
+                      formattingFn={n => new Intl.NumberFormat().format(n)}
+                      enableScrollSpy
+                    />
+                  </h4>
                   <p className="mt-1.5 text-lg font-medium leading-tight text-gray-500">
                     Deals completed
                   </p>
@@ -106,7 +117,9 @@ const Statistics = () => {
                   />
                 </svg>
                 <div className="ml-4">
-                  <h4 className="text-4xl font-bold text-gray-900">98%</h4>
+                  <h4 className="text-4xl font-bold text-gray-900">
+                    <CountUp end={98} enableScrollSpy />%
+                  </h4>
                   <p className="mt-1.5 text-lg font-medium leading-tight text-gray-500">
                     Success rate
                   </p>
