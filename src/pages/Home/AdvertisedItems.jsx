@@ -103,7 +103,7 @@ const AdvertisedItems = () => {
                       <Link
                         to={`/categories/${category?.split(" ").pop()}`}
                         className="flex items-center gap-4">
-                        <h3 className="text-gray-900 font-semibold text-xl tracking-tight capitalize truncate">
+                        <h3 className="text-gray-900 font-semibold text-xl tracking-tight capitalize truncate flex-grow">
                           {productName}
                         </h3>
                         <p className="text-xs text-right basis-2/5">
