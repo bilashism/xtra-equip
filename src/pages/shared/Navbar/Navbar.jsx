@@ -2,12 +2,13 @@ import React, { useContext, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../../../context/AuthProvider/AuthProvider";
 import logo from "../../../images/logo.svg";
-import { APP_NAME } from "../../../utilities/utilities";
+import { APP_NAME, throttle, APP_SERVER } from "../../../utilities/utilities";
 import { FaBlog, FaHome } from "react-icons/fa";
 import { IoMdExit } from "react-icons/io";
 import { HiUserCircle } from "react-icons/hi";
 import { BiCaretDown } from "react-icons/bi";
 import LoadingCircle from "../../../components/ui/LoadingCircle";
+import axios from "axios";
 
 const Navbar = () => {
   const [show, setShow] = useState(null);
@@ -16,6 +17,18 @@ const Navbar = () => {
     !window.matchMedia(`(min-width: 1280px)`).matches
   );
   const { user, userLogOut, authLoading } = useContext(AuthContext);
+  const [searchedProducts, setSearchedProducts] = useState([]);
+
+  const makeProductSearch = ev => {
+    const query = ev.target.value.trim();
+    if (!query) {
+      setSearchedProducts([]);
+      return;
+    }
+    axios(`${APP_SERVER}/products/search?find=${query}`).then(({ data }) => {
+      setSearchedProducts(data);
+    });
+  };
 
   useEffect(() => {
     const cleanup = () =>
@@ -209,7 +222,7 @@ const Navbar = () => {
     </div>
   );
   const searchItem = (
-    <div className="relative w-full">
+    <div className="relative w-full isolate">
       <div className="absolute ml-3 inset-0 m-auto w-4 h-4">
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -229,9 +242,24 @@ const Navbar = () => {
       </div>
       <input
         className="border border-indigo-400 focus:outline-none focus:border-indigo-700 w-full rounded text-sm bg-gray-50 pl-8 py-2 "
-        type="text"
+        type="search"
         placeholder="Search"
+        onChange={throttle(makeProductSearch, 1000)}
       />
+      <div className="absolute top-full left-0 w-full h-auto z-0 flex flex-col gap-1 mt-1">
+        {searchedProducts.length >= 1 &&
+          searchedProducts.map(product => (
+            <Link
+              key={product._id}
+              to={`/categories/${product.category.split(" ").pop()}`}
+              className="bg-slate-300 p-1 rounded"
+              onClick={() => {
+                setSearchedProducts([]);
+              }}>
+              {product.productName.toLowerCase()}
+            </Link>
+          ))}
+      </div>
     </div>
   );
 
