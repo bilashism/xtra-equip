@@ -108,64 +108,7 @@ const Navbar = () => {
 
   const profileMenuItems = (
     <>
-      <li className="cursor-pointer text-gray-600 text-sm leading-3 tracking-normal py-2 hover:text-indigo-700 focus:text-indigo-700 focus:outline-none">
-        <div className="flex items-center">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            className="icon icon-tabler icon-tabler-user"
-            width={20}
-            height={20}
-            viewBox="0 0 24 24"
-            strokeWidth="1.5"
-            stroke="currentColor"
-            fill="none"
-            strokeLinecap="round"
-            strokeLinejoin="round">
-            <path stroke="none" d="M0 0h24v24H0z" />
-            <circle cx={12} cy={7} r={4} />
-            <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
-          </svg>
-          <span className="ml-2">My Profile</span>
-        </div>
-      </li>
-      <li className="cursor-pointer text-gray-600 text-sm leading-3 tracking-normal mt-2 py-2 hover:text-indigo-700 focus:text-indigo-700 focus:outline-none flex items-center">
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          className="icon icon-tabler icon-tabler-help"
-          width={20}
-          height={20}
-          viewBox="0 0 24 24"
-          strokeWidth="1.5"
-          stroke="currentColor"
-          fill="none"
-          strokeLinecap="round"
-          strokeLinejoin="round">
-          <path stroke="none" d="M0 0h24v24H0z" />
-          <circle cx={12} cy={12} r={9} />
-          <line x1={12} y1={17} x2={12} y2="17.01" />
-          <path d="M12 13.5a1.5 1.5 0 0 1 1 -1.5a2.6 2.6 0 1 0 -3 -4" />
-        </svg>
-        <span className="ml-2">Help Center</span>
-      </li>
-      <li className="cursor-pointer text-gray-600 text-sm leading-3 tracking-normal mt-2 py-2 hover:text-indigo-700 flex items-center focus:text-indigo-700 focus:outline-none">
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          className="icon icon-tabler icon-tabler-settings"
-          width={20}
-          height={20}
-          viewBox="0 0 24 24"
-          strokeWidth="1.5"
-          stroke="currentColor"
-          fill="none"
-          strokeLinecap="round"
-          strokeLinejoin="round">
-          <path stroke="none" d="M0 0h24v24H0z" />
-          <path d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 0 0 2.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 0 0 1.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 0 0 -1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 0 0 -2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 0 0 -2.573 -1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 0 0 -1.065 -2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 0 0 1.066 -2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" />
-          <circle cx={12} cy={12} r={3} />
-        </svg>
-        <span className="ml-2">Account Settings</span>
-      </li>
-      <li className="cursor-pointer text-gray-600 text-sm leading-3 tracking-normal mt-2 py-2 hover:text-indigo-700 flex items-center focus:text-indigo-700 focus:outline-none">
+      <li className="cursor-pointer text-gray-600 text-sm leading-3 tracking-normal p-2 hover:text-indigo-700 flex items-center focus:text-indigo-700 focus:outline-none">
         <button
           type="button"
           className="flex items-center"
@@ -177,45 +120,47 @@ const Navbar = () => {
     </>
   );
   const profileDropdown = (
-    <div
-      className="w-full flex items-center justify-end relative cursor-pointer"
-      onClick={() => setProfile(!profile)}>
+    <div className="group relative flex flex-grow flex-wrap isolate z-auto">
       {authLoading ? (
         <LoadingCircle />
       ) : user?.uid ? (
         <>
-          {profile && (
-            <ul className="p-2 w-40 border-r bg-white absolute rounded left-0 shadow mt-16 top-0 ">
-              {profileMenuItems}
-            </ul>
-          )}
-          {user?.photoURL ? (
-            <img
-              className="rounded h-10 w-10 object-cover"
-              src={user?.photoURL}
-              alt={user?.displayName}
-              loading="lazy"
-              width={40}
-              height={40}
-              fetchpriority="low"
-              decoding="async"
-              onError={ev => {
-                ev.target.src =
-                  "data:image/svg+xml,%3Csvg stroke='currentColor' fill='currentColor' stroke-width='0' viewBox='0 0 496 512' height='1em' width='1em' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M248 8C111 8 0 119 0 256s111 248 248 248 248-111 248-248S385 8 248 8zm0 96c48.6 0 88 39.4 88 88s-39.4 88-88 88-88-39.4-88-88 39.4-88 88-88zm0 344c-58.7 0-111.3-26.6-146.5-68.2 18.8-35.4 55.6-59.8 98.5-59.8 2.4 0 4.8.4 7.1 1.1 13 4.2 26.6 6.9 40.9 6.9 14.3 0 28-2.7 40.9-6.9 2.3-.7 4.7-1.1 7.1-1.1 42.9 0 79.7 24.4 98.5 59.8C359.3 421.4 306.7 448 248 448z'%3E%3C/path%3E%3C/svg%3E";
-              }}
-            />
-          ) : (
-            <HiUserCircle className="w-10 h-10 text-blue-400  transition-colors hover:text-indigo-600" />
-          )}
-          <p className="text-xs ml-2 capitalize flex flex-col gap-1 items-center">
-            <span className="">{user?.displayName}</span>
-            <BiCaretDown className=" text-blue-400 hover:text-indigo-600" />
-          </p>
+          <button
+            type="button"
+            title={user?.displayName}
+            className="flex flex-grow justify-center items-center w-10 h-10 rounded">
+            {user?.photoURL ? (
+              <img
+                className="rounded-full ring-2 w-10 h-10 aspect-square object-cover"
+                src={user?.photoURL}
+                alt={user?.displayName}
+                loading="lazy"
+                width={40}
+                height={40}
+                fetchpriority="low"
+                decoding="async"
+                onError={ev => {
+                  ev.target.src =
+                    "data:image/svg+xml,%3Csvg stroke='currentColor' fill='currentColor' stroke-width='0' viewBox='0 0 496 512' height='1em' width='1em' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M248 8C111 8 0 119 0 256s111 248 248 248 248-111 248-248S385 8 248 8zm0 96c48.6 0 88 39.4 88 88s-39.4 88-88 88-88-39.4-88-88 39.4-88 88-88zm0 344c-58.7 0-111.3-26.6-146.5-68.2 18.8-35.4 55.6-59.8 98.5-59.8 2.4 0 4.8.4 7.1 1.1 13 4.2 26.6 6.9 40.9 6.9 14.3 0 28-2.7 40.9-6.9 2.3-.7 4.7-1.1 7.1-1.1 42.9 0 79.7 24.4 98.5 59.8C359.3 421.4 306.7 448 248 448z'%3E%3C/path%3E%3C/svg%3E";
+                }}
+              />
+            ) : (
+              <HiUserCircle className="w-10 h-10 text-blue-400 transition-colors hover:text-indigo-600" />
+            )}
+            <span className="text-xs ml-2 capitalize flex flex-col gap-1 items-center">
+              <span className="">{user?.displayName}</span>
+              <BiCaretDown className=" text-blue-400 hover:text-indigo-600" />
+            </span>
+          </button>
+
+          <nav className="border bg-white invisible border-gray-800 w-40 absolute right-0 top-full transition-all opacity-0 group-hover:visible group-hover:opacity-100 group-hover:translate-y-1 group-focus-within:visible group-focus-within:opacity-100 group-focus-within:translate-y-1">
+            <ul className="flex flex-col gap-2">{profileMenuItems}</ul>
+          </nav>
         </>
       ) : (
         <Link
           to="/login"
-          className="inline-flex items-center justify-center w-full px-4 py-2 capitalize font-semibold text-white transition-all duration-200 bg-orange-500 border border-transparent rounded-lg sm:w-auto hover:bg-orange-600 focus:bg-orange-600">
+          className="inline-flex items-center justify-center w-full px-4 py-2 capitalize font-semibold text-white transition-all duration-200 bg-orange-500 border border-transparent rounded-lg hover:bg-orange-600 focus:bg-orange-600">
           log in
         </Link>
       )}
@@ -241,9 +186,9 @@ const Navbar = () => {
         </svg>
       </div>
       <input
-        className="border border-indigo-400 focus:outline-none focus:border-indigo-700 w-full rounded text-sm bg-gray-50 pl-8 py-2 "
+        className="border border-indigo-400 focus:outline-none focus:border-indigo-700 w-full rounded text-sm bg-gray-50 pl-8 pr-4 py-2 xl:max-w-lg xl:w-full"
         type="search"
-        placeholder="Search"
+        placeholder="Search products"
         onChange={throttle(makeProductSearch, 1000)}
       />
       <div className="absolute top-full left-0 w-full h-auto z-0 flex flex-col gap-1 mt-1">
@@ -264,7 +209,7 @@ const Navbar = () => {
   );
   const notificationsDropdown = (
     <>
-      <div className="group relative flex">
+      <div className="group relative flex isolate z-10">
         <button type="button" title="notifications" className="w-6 h-6">
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -300,12 +245,12 @@ const Navbar = () => {
                 {menuItems}
               </ul>
             </div>
-            <div className="h-full xl:flex items-center justify-end hidden">
-              <div className="w-full h-full flex items-center">
-                <div className="w-full pr-12 h-full flex items-center">
+            <div className="h-full xl:flex xl:w-full xl:max-w-xl items-center justify-end hidden">
+              <div className="w-full h-full flex items-center gap-8">
+                <div className="flex-grow-[2] h-full flex items-center">
                   {searchItem}
                 </div>
-                <div className="w-full h-full flex items-center">
+                <div className="flex-grow h-full flex items-center gap-4">
                   {notificationsDropdown}
                   {profileDropdown}
                 </div>
@@ -390,7 +335,7 @@ const Navbar = () => {
                     </div>
 
                     <div className="border-t border-gray-800">
-                      <div className="w-full flex items-center justify-between pt-1">
+                      <div className="w-full flex items-center justify-between pt-1 gap-2">
                         <ul className="flex">
                           <li className="cursor-pointer  ">
                             {notificationsDropdown}

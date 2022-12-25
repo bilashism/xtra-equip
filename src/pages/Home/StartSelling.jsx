@@ -21,17 +21,17 @@ const StartSelling = () => {
         </div>
       </div>
 
-      <div class="absolute w-full h-full -z-10 overflow-hidden top-0 after:absolute after:bg-slate-900 after:w-full after:h-full after:top-0 after:bg-opacity-80 after:backdrop-filter after:backdrop-blur">
-        <figure class="w-full h-full ">
+      <div className="absolute w-full h-full -z-10 overflow-hidden top-0 after:absolute after:bg-slate-900 after:w-full after:h-full after:top-0 after:bg-opacity-80 after:backdrop-filter after:backdrop-blur">
+        <figure className="w-full h-full ">
           <picture>
             <source
-              srcset="https://images.unsplash.com/photo-1526401485004-46910ecc8e51?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80"
+              srcSet="https://images.unsplash.com/photo-1526401485004-46910ecc8e51?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80"
               media="(min-width: 0px)"
             />
             <img
               src="https://images.unsplash.com/photo-1526401485004-46910ecc8e51?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80"
-              alt="image"
-              class="object-cover w-full h-full"
+              alt="Start Selling banner"
+              className="object-cover w-full h-full"
               loading="lazy"
             />
           </picture>
