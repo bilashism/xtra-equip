@@ -1,6 +1,7 @@
 import React from "react";
 import useTitle from "../../hooks/useTitle";
 import AdvertisedItems from "./AdvertisedItems";
+import Brands from "./Brands";
 import Categories from "./Categories";
 import FeaturedBlogPosts from "./FeaturedBlogPosts";
 import Header from "./Header";
@@ -15,6 +16,7 @@ const Home = () => {
       <Header />
       <AdvertisedItems />
       <Categories />
+      <Brands />
       <Statistics />
       <StartSelling />
       <FeaturedBlogPosts />
