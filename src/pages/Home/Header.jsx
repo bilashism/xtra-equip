@@ -2,6 +2,7 @@ import React from "react";
 import CountUp from "react-countup";
 import NewsletterSubscription from "../../components/ui/NewsletterSubscription";
 import certificationBadge from "../../images/certification-badge.png";
+import { motion } from "framer-motion";
 
 const Header = () => {
   return (
@@ -36,13 +37,17 @@ const Header = () => {
                   </p>
                 </div>
 
-                <div className="absolute hidden lg:block right-0 z-10 w-40 h-40 lg:top-24 lg:-left-20">
+                <motion.div
+                  initial={{ opacity: 0, y: -50, scale: 0.75 }}
+                  whileInView={{ opacity: 1, y: 0, scale: 1 }}
+                  transition={{ duration: 0.75 }}
+                  className="absolute hidden lg:block right-0 z-10 w-40 h-40 lg:top-24 lg:-left-20">
                   <img
                     className="w-40 h-40 object-contain md:w-40 md:h-40 -rotate-12"
                     src={certificationBadge}
                     alt="certification badge"
                   />
-                </div>
+                </motion.div>
               </div>
 
               <div className="relative w-full overflow-hidden lg:order-1 h-96 lg:h-auto lg:w-5/12">
