@@ -52,8 +52,8 @@ const Brands = () => {
             }}
             modules={[Autoplay]}
             className="">
-            {availableBrands?.map(url => (
-              <SwiperSlide>
+            {availableBrands?.map((url, i) => (
+              <SwiperSlide key={`brands-${i + 1}`}>
                 <img
                   className="rounded-t-lg w-64 h-24 object-contain mx-auto"
                   src={url}
