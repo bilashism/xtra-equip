@@ -262,7 +262,32 @@ const Navbar = () => {
       </div>
     </div>
   );
-
+  const notificationsDropdown = (
+    <>
+      <div className="group relative flex">
+        <button type="button" title="notifications" className="w-6 h-6">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            className="icon icon-tabler icon-tabler-bell"
+            viewBox="0 0 24 24"
+            strokeWidth={1}
+            stroke="currentColor"
+            fill="none"
+            strokeLinecap="round"
+            strokeLinejoin="round">
+            <path stroke="none" d="M0 0h24v24H0z" />
+            <path d="M10 5a2 2 0 0 1 4 0a7 7 0 0 1 4 6v3a4 4 0 0 0 2 3h-16a4 4 0 0 0 2 -3v-3a7 7 0 0 1 4 -6" />
+            <path d="M9 17v1a3 3 0 0 0 6 0v-1" />
+          </svg>
+        </button>
+        <nav className="border bg-white invisible border-gray-800 w-40 absolute top-full transition-all opacity-0 group-hover:visible group-hover:opacity-100 group-hover:translate-y-1 group-focus-within:visible group-focus-within:opacity-100 group-focus-within:translate-y-1 p-2">
+          <ul className="flex flex-col gap-2">
+            <li>No notifications for now 🔕</li>
+          </ul>
+        </nav>
+      </div>
+    </>
+  );
   return (
     <nav className="sticky top-0 w-full isolate z-20">
       <div className="bg-gray-50 h-full w-full">
@@ -281,23 +306,7 @@ const Navbar = () => {
                   {searchItem}
                 </div>
                 <div className="w-full h-full flex items-center">
-                  <div className="w-32 h-full flex items-center justify-center text-indigo-400 cursor-pointer">
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      className="icon icon-tabler icon-tabler-bell"
-                      width={28}
-                      height={28}
-                      viewBox="0 0 24 24"
-                      strokeWidth="1.5"
-                      stroke="currentColor"
-                      fill="none"
-                      strokeLinecap="round"
-                      strokeLinejoin="round">
-                      <path stroke="none" d="M0 0h24v24H0z" />
-                      <path d="M10 5a2 2 0 0 1 4 0a7 7 0 0 1 4 6v3a4 4 0 0 0 2 3h-16a4 4 0 0 0 2 -3v-3a7 7 0 0 1 4 -6" />
-                      <path d="M9 17v1a3 3 0 0 0 6 0v-1" />
-                    </svg>
-                  </div>
+                  {notificationsDropdown}
                   {profileDropdown}
                 </div>
               </div>
@@ -383,39 +392,8 @@ const Navbar = () => {
                     <div className="border-t border-gray-800">
                       <div className="w-full flex items-center justify-between pt-1">
                         <ul className="flex">
-                          <li className="cursor-pointer  pt-5 pb-3">
-                            <div className="w-6 h-6 md:w-8 md:h-8">
-                              <svg
-                                xmlns="http://www.w3.org/2000/svg"
-                                className="icon icon-tabler icon-tabler-messages"
-                                viewBox="0 0 24 24"
-                                strokeWidth={1}
-                                stroke="currentColor"
-                                fill="none"
-                                strokeLinecap="round"
-                                strokeLinejoin="round">
-                                <path stroke="none" d="M0 0h24v24H0z" />
-                                <path d="M21 14l-3 -3h-7a1 1 0 0 1 -1 -1v-6a1 1 0 0 1 1 -1h9a1 1 0 0 1 1 1v10" />
-                                <path d="M14 15v2a1 1 0 0 1 -1 1h-7l-3 3v-10a1 1 0 0 1 1 -1h2" />
-                              </svg>
-                            </div>
-                          </li>
-                          <li className="cursor-pointer  pt-5 pb-3 pl-3">
-                            <div className="w-6 h-6 md:w-8 md:h-8">
-                              <svg
-                                xmlns="http://www.w3.org/2000/svg"
-                                className="icon icon-tabler icon-tabler-bell"
-                                viewBox="0 0 24 24"
-                                strokeWidth={1}
-                                stroke="currentColor"
-                                fill="none"
-                                strokeLinecap="round"
-                                strokeLinejoin="round">
-                                <path stroke="none" d="M0 0h24v24H0z" />
-                                <path d="M10 5a2 2 0 0 1 4 0a7 7 0 0 1 4 6v3a4 4 0 0 0 2 3h-16a4 4 0 0 0 2 -3v-3a7 7 0 0 1 4 -6" />
-                                <path d="M9 17v1a3 3 0 0 0 6 0v-1" />
-                              </svg>
-                            </div>
+                          <li className="cursor-pointer  ">
+                            {notificationsDropdown}
                           </li>
                         </ul>
                         {profileDropdown}
