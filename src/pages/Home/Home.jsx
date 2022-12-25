@@ -4,6 +4,7 @@ import AdvertisedItems from "./AdvertisedItems";
 import Categories from "./Categories";
 import FeaturedBlogPosts from "./FeaturedBlogPosts";
 import Header from "./Header";
+import Newsletter from "./Newsletter";
 import StartSelling from "./StartSelling";
 import Statistics from "./Statistics";
 
@@ -17,6 +18,7 @@ const Home = () => {
       <Statistics />
       <StartSelling />
       <FeaturedBlogPosts />
+      <Newsletter />
     </>
   );
 };
