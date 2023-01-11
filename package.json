@@ -41,12 +41,12 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/programming-hero-web-course-4/b612-used-products-resale-clients-side-bilashism.git"
+    "url": "git+https://github.com/bilashism/xtra-equip.git"
   },
   "author": "Md. Taifuzzaman Bilash <bilashism@gmail.com>",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/programming-hero-web-course-4/b612-used-products-resale-clients-side-bilashism/issues"
+    "url": "https://github.com/bilashism/xtra-equip/issues"
   },
-  "homepage": "https://github.com/programming-hero-web-course-4/b612-used-products-resale-clients-side-bilashism#readme"
+  "homepage": "https://github.com/bilashism/xtra-equip#readme"
 }
