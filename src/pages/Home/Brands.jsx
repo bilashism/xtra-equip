@@ -1,9 +1,5 @@
 import React from "react";
-import { Pagination, Autoplay } from "swiper";
-import { Swiper, SwiperSlide } from "swiper/react";
-import "swiper/css";
-import "swiper/css/pagination";
-
+import Marquee from "react-fast-marquee";
 const Brands = () => {
   const availableBrands = [
     "https://www.seekpng.com/png/detail/554-5547411_our-brands-tapout-fitness-logo-png.png",
@@ -17,56 +13,37 @@ const Brands = () => {
   ];
   return (
     <section className="">
-      <div className="container-default">
+      <div className="">
         <h2 className="text-3xl font-bold mb-6 xl:mb-12 text-center">
           Available brands
         </h2>
 
-        <div className="">
-          <Swiper
-            slidesPerView={1}
-            spaceBetween={10}
-            breakpoints={{
-              480: {
-                centeredSlides: false,
-                slidesPerView: 2,
-                spaceBetween: 20
-              },
-              992: {
-                slidesPerView: 3,
-                spaceBetween: 40
-              },
-              1300: {
-                slidesPerView: 5,
-                spaceBetween: 50
-              }
-            }}
-            centeredSlides={true}
-            initialSlide={0}
-            grabCursor={true}
-            loop={true}
-            autoplay={{
-              delay: 4000,
-              disableOnInteraction: false,
-              pauseOnMouseEnter: true
-            }}
-            modules={[Autoplay]}
-            className="">
-            {availableBrands?.map((url, i) => (
-              <SwiperSlide key={`brands-${i + 1}`}>
-                <img
-                  className="rounded-t-lg w-64 h-24 object-contain mx-auto"
-                  src={url}
-                  alt="brand"
-                  width="256"
-                  height="96"
-                  decoding="async"
-                  fetchpriority="low"
-                  loading="lazy"
-                />
-              </SwiperSlide>
+        <div className="pt-4">
+          <Marquee
+            gradient={true}
+            speed={50}
+            autoFill={true}
+            pauseOnHover={true}>
+            {availableBrands?.map((src, idx) => (
+              <figure
+                className="flex justify-center items-center text-center px-4"
+                key={`brand-${idx + 1}`}>
+                <picture className="flex justify-center items-center text-center">
+                  <source media="(min-width: 320px)" srcSet={src} />
+                  <img
+                    src={src}
+                    alt="brands logo"
+                    className="w-52 h-44 object-contain"
+                    loading="lazy"
+                    width="208"
+                    height="176"
+                    decoding="async"
+                    fetchpriority="low"
+                  />
+                </picture>
+              </figure>
             ))}
-          </Swiper>
+          </Marquee>
         </div>
       </div>
     </section>
