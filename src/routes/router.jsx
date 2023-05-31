@@ -1,3 +1,4 @@
+import { lazy } from "react";
 import { createBrowserRouter } from "react-router-dom";
 import NotFound from "../components/NotFound";
 import DashboardLayout from "../layouts/DashboardLayout/DashboardLayout";
@@ -9,7 +10,7 @@ import AllBuyers from "../pages/Dashboard/AllBuyers/AllBuyers";
 import AllSellers from "../pages/Dashboard/AllSellers/AllSellers";
 import MyBuyers from "../pages/Dashboard/MyBuyers/MyBuyers";
 import MyOrders from "../pages/Dashboard/MyOrders/MyOrders";
-import Payment from "../pages/Dashboard/MyOrders/Payment";
+// import Payment from "../pages/Dashboard/MyOrders/Payment";
 import MyProducts from "../pages/Dashboard/MyProducts/MyProducts";
 import ReportedItems from "../pages/Dashboard/ReportedItems/ReportedItems";
 import Settings from "../pages/Dashboard/Settings/Settings";
@@ -22,6 +23,7 @@ import BuyerRoute from "./BuyerRoute/BuyerRoute";
 import PrivateRoute from "./PrivateRoute/PrivateRoute";
 import SellerRoute from "./SellerRoute/SellerRoute";
 
+const Payment = lazy(() => import("../pages/Dashboard/MyOrders/Payment"));
 export const router = createBrowserRouter([
   {
     path: "/",

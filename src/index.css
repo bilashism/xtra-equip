@@ -7,3 +7,8 @@
     @apply container  mx-auto  px-4;
   }
 }
+.marquee-container,
+.marquee,
+.initial-child-container {
+  gap: var(--items-gap, 1rem);
+}

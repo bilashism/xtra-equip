@@ -84,9 +84,9 @@ const AdvertisedItems = () => {
               description,
               sellingPrice
             }) => (
-              <SwiperSlide key={_id} className="mb-10">
+              <SwiperSlide key={_id} className="mb-10 px-1">
                 <div className="max-w-2xl mx-auto py-4">
-                  <div className="bg-white shadow-md rounded-lg max-w-sm">
+                  <div className="bg-white shadow-md border border-gray-50 rounded-lg max-w-2xl mx-auto">
                     <Link to={`/categories/${category?.split(" ").pop()}`}>
                       <img
                         className="rounded-t-lg p-8 w-64 h-64 object-cover mx-auto"

@@ -40,7 +40,7 @@ const NewsletterSubscription = () => {
                   required: "Please provide a valid email address!"
                 })}
                 placeholder="Enter email to get notified"
-                className="block w-full px-4 py-4 text-base text-center text-black placeholder-gray-500 transition-all duration-200 border-transparent rounded-full sm:text-left focus:border-transparent focus:ring-0 caret-orange-500"
+                className="block w-full px-4 py-4 text-base text-black placeholder-gray-500 transition-all duration-200 border-transparent rounded-full sm:text-left focus:border-transparent focus:ring-0 caret-orange-500"
               />
             </div>
           </div>

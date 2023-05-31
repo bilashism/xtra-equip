@@ -1,5 +1,9 @@
 import React from "react";
 import Marquee from "react-fast-marquee";
+// import { Splide, SplideSlide, SplideTrack } from "@splidejs/react-splide";
+// import { AutoScroll } from "@splidejs/splide-extension-auto-scroll";
+// import "@splidejs/splide/css";
+
 const Brands = () => {
   const availableBrands = [
     "https://www.seekpng.com/png/detail/554-5547411_our-brands-tapout-fitness-logo-png.png",
@@ -13,27 +17,28 @@ const Brands = () => {
   ];
   return (
     <section className="">
-      <div className="">
+      <div className="overflow-hidden">
         <h2 className="text-3xl font-bold mb-6 xl:mb-12 text-center">
           Available brands
         </h2>
-
-        <div className="pt-4">
+        <div className="pt-4 overflow-hidden">
           <Marquee
             gradient={true}
+            gradientWidth={50}
             speed={50}
             autoFill={true}
-            pauseOnHover={true}>
+            pauseOnHover={true}
+            className="[--items-gap:1.5rem]">
             {availableBrands?.map((src, idx) => (
               <figure
-                className="flex justify-center items-center text-center px-4"
+                className="flex h-full justify-center items-center text-center"
                 key={`brand-${idx + 1}`}>
-                <picture className="flex justify-center items-center text-center">
+                <picture className="flex h-full justify-center items-center text-center">
                   <source media="(min-width: 320px)" srcSet={src} />
                   <img
                     src={src}
                     alt="brands logo"
-                    className="w-52 h-44 object-contain"
+                    className="xl:w-52 xl:h-44 object-contain"
                     loading="lazy"
                     width="208"
                     height="176"
@@ -44,6 +49,57 @@ const Brands = () => {
               </figure>
             ))}
           </Marquee>
+
+          {/* <Splide
+            className="overflow-hidden"
+            extensions={{ AutoScroll }}
+            hasTrack={false}
+            aria-label="brands slider"
+            options={{
+              type: "loop",
+              arrows: false,
+              pauseOnFocus: false,
+              pauseOnHover: false,
+              pagination: false,
+              drag: "free",
+              focus: "center",
+              easing: "linear",
+              perPage: 2,
+              mediaQuery: "min",
+              breakpoints: {
+                640: {
+                  perPage: 4
+                },
+                1280: {
+                  perPage: 6
+                }
+              },
+              autoScroll: {
+                speed: 1
+              }
+            }}>
+            <SplideTrack>
+              {availableBrands?.map((src, idx) => (
+                <SplideSlide key={`brand-${idx + 1}`}>
+                  <figure className="flex h-full justify-center items-center text-center px-4">
+                    <picture className="flex h-full justify-center items-center text-center">
+                      <source media="(min-width: 320px)" srcSet={src} />
+                      <img
+                        src={src}
+                        alt="brands logo"
+                        className="xl:w-52 xl:h-44 object-contain"
+                        loading="lazy"
+                        width="208"
+                        height="176"
+                        decoding="async"
+                        fetchpriority="low"
+                      />
+                    </picture>
+                  </figure>
+                </SplideSlide>
+              ))}
+            </SplideTrack>
+          </Splide> */}
         </div>
       </div>
     </section>
